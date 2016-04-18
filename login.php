@@ -1,29 +1,29 @@
    <?php
 
-   $email = $_POST["Email"];
+   $user = $_POST["User"];
    $pass = $_POST["Pass"] ;
 
-   if(!$email or !$pass){
+   if(!$user or !$pass){
       echo "<html>";
       echo "<title> Empty fields </title>";
       echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
       echo '<BODY BGCOLOR="#c5d9c1" TEXT = "black">';
       echo "Empty Field. Please try again. Redirecting you back. ";
-      echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=isindexSearch.php">';
+      echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=index.html">';
       echo '</body>';
       echo '</html>';
 
    } else{
        include ("readDb.php");
 
-       if($founduser == 0){
+       if($found == 0){
 
           echo "<html>";
-          echo' <title> Email does not exist </title>';
+          echo' <title> User does not exist </title>';
           echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
           echo '<BODY BGCOLOR="#c5d9c1" TEXT = "black">';
-          echo ' Email not found. Please try again. Redirecting you back. ';
-          echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=isindexSearch.php">';
+          echo ' User not found. Please try again. Redirecting you back. ';
+          echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
           echo '</body>';
           echo ' </html>';
 
@@ -34,20 +34,20 @@
                 echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
                 echo '<BODY BGCOLOR="#c5d9c1" TEXT = "black">';
                 echo "Wrong password. Please try again. Redirecting you back. ";
-                echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=isindexSearch.php">';
+                echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
                 echo '</body>';
                 echo ' </html>';
 
              } else {
               echo "<html>";
-              echo " <title> Pear - " .$row_user[fName]. "'s profile. </title>";
+              echo " <title> Pear - " .$row[fName]. "'s profile. </title>";
               echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
               echo '<BODY BGCOLOR="#c5d9c1" TEXT = "black">';
               echo '<script type ="text/javascript" src="isEmail.js"></script>
 <script type="text/javascript" src="isBlank.js"></script>
 <script type ="text/javascript" src="checkTrip.js"></script>';
               echo '<center> <IMG src="Logo.png" width="10%" height="auto"> <br><br>' ;
-              echo '<b>Hi, ' .$row_user[fName]. '. <i>Welcome back!</i> </b><br>';
+              echo '<b>Hi, ' .$row[fName]. '. <i>Welcome back!</i> </b><br>';
 
               echo '<SCRIPT TYPE="text/javascript"> 
               function popup(url) {
@@ -59,18 +59,14 @@
                   return false; 
               } 
               </SCRIPT>';
-              
-              echo 'You have <b>' .$row_user[Ref]. '</b> referral points. Click <A HREF="refrewards.html" onClick="return popup(this)">here</A> to see referral reward tiers.<br><br>';
 
               echo '<h3>Your Information</h3>';
               echo "<form name='editU' action='editUser.php' method='post'>";
               echo "<input type='hidden' name='Pass' value=$pass />";
-              echo "<input type='hidden' name='Email' value=$email />";
+              echo "<input type='hidden' name='User' value=$user />";
               echo '<CENTER><TABLE BGCOLOR="#c5d9c1" BORDER=0 WIDTH=25%>';
-              echo '<tr><td><b>First Name:</b></td><td>'.$row_user[fName].'</td></tr>';
-              echo '<tr><td><b>Last Name:</b></td><td>'.$row_user[lName].'</td></tr>';
-              echo '<tr><td><b>College:</b></td><td>'.$row_user[college].'</td></tr>';
-              echo '<tr><td><b>Major:</b></td><td>'.$row_user[major].'</td></tr>';
+              echo '<tr><td><b>First Name:</b></td><td>'.$row[fName].'</td></tr>';
+              echo '<tr><td><b>Last Name:</b></td><td>'.$row[lName].'</td></tr>';
               echo '</TABLE></CENTER>';
               echo "<br><input type='submit' value='Update User Info'><br>";
               echo "</form>";
@@ -90,7 +86,7 @@
               echo "<TH>Available Seats</TH>";
               echo "</TR>";
 
-              include ("connectDb.php");
+             /* include ("connectDb.php");
               $sqlt = "SELECT * FROM ridersdb INNER JOIN tripdb ON emailtrip = emailriders WHERE emailriders = '$email' ";
 
               // Again, Send the request
@@ -112,7 +108,7 @@
 
               mysql_close($conn);
                  
-              echo "</TABLE></CENTER>";
+              echo "</TABLE></CENTER>"; */
               echo "<br>";
 
               echo "<H3>Update or Add a Trip</H3>";
@@ -242,7 +238,7 @@
 <tr><td> <input type="number" name="Seats" value="0" />  </td> <td id="SeatsReq"></td></tr>
 </table>';
               echo "<input type='hidden' name='Pass' value=$pass />";
-              echo "<input type='hidden' name='Email' value=$email />";
+              echo "<input type='hidden' name='User' value=$user />";
               echo "<br><input type='submit' value='Update'><br>";
               echo "</form><br>";
 
@@ -250,14 +246,14 @@
               echo "<form name='new1' action='deleteTrip.php' method='post' onsubmit='return !isBlank(\"new1\", \"tripID1\");'>";
               echo '<table width = 400><tr><td>Trip ID: </td><td><input type="text" name="tripID1" /></td></tr></table>';
               echo "<input type='hidden' name='Pass' value=$pass />";
-              echo "<input type='hidden' name='Email' value=$email />";
+              echo "<input type='hidden' name='User' value=$user />";
               echo "<br><input type='submit' value='Delete'><br>";
               echo "</form><br>";
 
               echo '<H3>Log Out or Unsubscribe</H3>';
-              echo '<a href="isindexSearch.php"><button>Log Out</button></a><br><br>';
+              echo '<a href="index.html"><button>Log Out</button></a><br><br>';
               echo '<form id="unsubscribe" action="deleteMember.php" method="post">';
-              echo "<input type='hidden' name='Email' value=$email />";
+              echo "<input type='hidden' name='User' value=$user />";
               echo "<input type='submit' value='Unsubscribe'><br>";
               echo '</form>';
               echo "<br>";

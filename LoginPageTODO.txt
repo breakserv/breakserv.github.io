@@ -1,0 +1,9 @@
+login screen should: 
+-say "hi"
+-say something like "here are your events from XXX email" OR if the user is new, say "Get started here" to start the authentication/scraping proces
+-display map with pins (empty if the user hasn't alllowed us to access their email)
+-allow user to see a list of all events (on a separate page)
+-Add, Edit, or Delete an event
+-logout
+-unsubscribe
+-if they're new, have a dialogue above that says "start off by checking your email for events"

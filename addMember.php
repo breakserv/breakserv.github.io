@@ -2,7 +2,7 @@
 <head>
 <title>BreakServ - Member Registration</title>
 </head>
-<BODY BGCOLOR="#c5d9c1" TEXT = "black">
+<BODY BGCOLOR="#313131" TEXT = "white">
 
 <?php
       //get variables
@@ -22,7 +22,7 @@
 
                  include ("connectDb.php");
 
-                 // Database insertion - make sure to check if there's a referral
+                 // Database insertion. Some columns have default values, so ignore those when inserting into database
                  $sql = "INSERT INTO Members (fName, lName, Email, User, pass) VALUES ('$fname' ,'$lname', '$email', '$user', '$pass')";
                  $result = mysql_query($sql);
 
@@ -39,19 +39,18 @@
 
                  } else
 
-       			     echo ' <br> <font color="red"> <b><i> Error. Please Try Again. </b></i></font>';
+       			     echo ' <br><br><br><br><br><center><h1> <font color="red"> Error. Please Try Again. </font></h1></center>';
 
                  mysql_close($conn);
       	
               } else {
-      		       echo "<center>You didn't include all the information. Please Try Again. Redirecting you to Registration. <br>";
-                 //echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=newMember.html">';
-                 echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=newaccount2.html">';
+      		       echo "<br><br><br><br><br><center><h1>You didn't include all the information. Please Try Again. Redirecting you to Registration. </h1></center>";
+                   echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=newMember.html">';
      	      }
 
       }  else {
-          echo "<center>Email already exists. Please log-in. Redirecting you home<br>";
-          echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=isindexSearch.php">';
+          echo "<br><br><br><br><br><center><h1>Username already exists. Please log in or try registering again. Redirecting you home</h1></center>";
+          echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html#login">';
       }
 
  ?>

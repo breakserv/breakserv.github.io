@@ -8,7 +8,7 @@
       echo "<title> Empty fields </title>";
       echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
       echo '<BODY BGCOLOR="#313131" TEXT = "white">';
-      echo "Empty Field. Please try again. Redirecting you back. ";
+      echo "<br><br><br><br><br><h1><center>Empty Field. Please try again. Redirecting you back. </center></h1>";
       echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=index.html">';
       echo '</body>';
       echo '</html>';
@@ -20,9 +20,9 @@
 
           echo "<html>";
           echo' <title> User does not exist </title>';
-          echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
+          //echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
           echo '<BODY BGCOLOR="#313131" TEXT = "white">';
-          echo ' User not found. Please try again. Redirecting you back. ';
+          echo '<br><br><br><br><br><center><h1> User not found. Please try again. Redirecting you back.</h1></center> ';
           echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
           echo '</body>';
           echo ' </html>';
@@ -33,7 +33,7 @@
                 echo ' <title> Incorrect Password </title>';
                 echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
                 echo '<BODY BGCOLOR="#313131" TEXT = "white">';
-                echo "Wrong password. Please try again. Redirecting you back. ";
+                echo "<br><br><br><br><br><center><h1>Wrong password. Please try again. Redirecting you back.</h1></center> ";
                 echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
                 echo '</body>';
                 echo ' </html>';
@@ -44,7 +44,7 @@
 echo "<html>";
 
 // ***********************************************************************
-// SKELETAL CODE FROM http://startbootstrap.com/template-overviews/agency/ 
+// TEMPLATE FROM http://startbootstrap.com/template-overviews/agency/ 
 // ***********************************************************************
 
 echo "<head>";
@@ -84,20 +84,47 @@ echo '<body id="page-top" class="index">
                  <h2 class="section-heading">Hi, ' .$row[fName]. '. Welcome back!</h2>';
 
                  // CHECK IF USER IS NEW OR NOT. If new, display "get started here!" to start the authentication/scraping process.
-                 // If isNew = 1, basically.
+                 if ($row[isNew] == 1)
+                 {
+                    echo '<BR><BR><h3 class="service-heading text-muted">Start off by checking your email for events! [Python integration via button or new page]</h3>';
+                 } 
+                 else {
+                    // NOTE: THIS NEEDS TO BE CHANGED LATER TO ACTUAL EMAIL! (currently, only have username + pass info)
+                    echo '<h3 class="section-subheading text-muted">Here are your events from ' .$row[User]. ' email.</h3> 
+                          </div>
+                          </div>';
+                 }
+
+         echo '<center>
 
 
-                 // else....display map with pins
-
-      // NOTE: THIS NEEDS TO BE CHANGED LATER TO ACTUAL EMAIL! (currently, only have username + pass info)
-     echo '<h3 class="section-subheading text-muted">Here are your events from ' .$row[User]. ' email.</h3> 
-             </div>
-         </div>
-    <center>
          <!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!!1 -->
+        <BR><BR><BR><BR><BR>MAP DISPLAY GOES HERE!!!!!<BR><BR><BR><BR><BR>
 
-         <!-- Button to display all events and add, edit, or delete any one of them -->
-         <form action="http://google.com">
+
+
+
+         <!-- Detect if free user or not -->';
+         if ($row[isFree] == 1)
+         {  
+                  // ADS!!!!
+                  echo '<img src="ad.jpg" class="pull-left"><img src="ad.jpg" class="pull-right">
+
+                  <BR><BR><h3 class="service-heading text-muted">As a free user, you can store up to 5 events at once.</h3>
+                  <h3 class="section-subheading text-muted">What does a <a href="index.html#services" target="_blank">Premium membership</a> offer me?</h3>
+                  
+                  <form action="upgrade.php" method="post">';
+                  echo "<input type='hidden' name='User' value=$user />";
+                  echo "<input type='hidden' name='Pass' value=$pass />";
+                  echo '<button type="submit" class="btn btn-xl">Upgrade Premium</button>
+                  </form><BR><BR>';
+         } else {
+            echo '<h3 class="section-subheading text-muted">You are a Premium user!</h3>';
+         }
+
+
+      echo '<!-- Button to display all events and add, edit, or delete any one of them -->
+         <form action="index.html">
             <button type="submit" class="btn btn-xl">View, Add, Delete, or Edit Your Events</button>
          </form>
 
@@ -107,7 +134,7 @@ echo '<body id="page-top" class="index">
             <button type="submit" class="btn btn-xl">Logout</button>
          </form>
 
-    </center>
+</center>
     </section>
 
     <footer>
@@ -118,19 +145,18 @@ echo '<body id="page-top" class="index">
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
-                        <li> <a href="index.html">Unsubscribe</a></h3> 
+                        <li>               
+              <form id="unsubscribe" action="unsub.php" method="post">';
+              echo "<input type='hidden' name='User' value=$user />";
+              echo "<input type='submit' value='Unsubscribe' class='text_button'><br>";
+              echo '</form>';
+                        echo '</h3> 
                         </li>
-                        <li><a href="#">Privacy Policy</a>
+                        <li><a href="pp.html" target="_blank">Privacy Policy</a>
                         </li>
                         <li><a href="#">Terms of Use</a>
                         </li>

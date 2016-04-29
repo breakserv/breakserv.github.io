@@ -1,0 +1,27 @@
+Database Code -
+
+CREATE TABLE Members (
+    fName varchar(15),
+    lName varchar(15),
+    Email varchar(30),
+    User varchar(30) UNIQUE,
+    pass varchar(30),
+    isNew binary(1) DEFAULT 1,
+    isFree binary(1) DEFAULT 1,
+    CurrCount int DEFAULT 0,
+    lastScanDate date,
+    lastScanTime time,
+    PRIMARY KEY(Email)
+)
+
+CREATE TABLE Events (
+    eID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    eUser varchar(30),
+    eventName varchar(30),
+    startDate date,
+    startTime time,
+    endTime time,
+    eLocation varchar(30),
+    isFood binary(1),
+    eDetails varchar(150)
+)

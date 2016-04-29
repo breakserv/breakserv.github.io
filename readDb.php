@@ -5,6 +5,7 @@
 
       // Here is another way of making an SQL query.
       $sqlt = "SELECT * FROM Members WHERE User = '$user' ";
+      // $sqlt = "SELECT * FROM ridersdb INNER JOIN tripdb ON emailtrip = emailriders WHERE emailriders = '$email' ";
 
       // Again, Send the request
       $result = mysql_query($sqlt);

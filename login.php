@@ -58,6 +58,18 @@ echo "<head>";
     echo " <title> BreakServ - " .$row[fName]. "'s profile. </title>";
     echo '<BODY BGCOLOR="#313131" TEXT = "white">';
 
+    echo '
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>';
+
     echo '<link href="css/bootstrap.min.css" rel="stylesheet">';
     echo '<link href="css/agency.css" rel="stylesheet">';
     echo '<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">';
@@ -99,12 +111,96 @@ echo '<body id="page-top" class="index">
 
 
          <!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!!1 -->
-        <BR><BR><BR><BR><BR>MAP DISPLAY GOES HERE!!!!!<BR><BR><BR><BR><BR>
+   <BR><div id="map" style="width: 400px; height: 500px;"></div>
+    <script>
+
+      function initMap() {
+        var myLatLng = {lat: 40.3573, lng: -74.6672};
+
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 13,
+          center: myLatLng
+        });
+
+        var addresses = [
+            ["Bloomberg Hall Princeton, NJ 08544", "Chipotle study break", 0, 0],
+            ["Joline Hall Princeton, NJ 08544", "Ice cream study break", 0, 0]
+        ];
+
+
+        var geocoder = new google.maps.Geocoder();
+
+        var marker, i;
+
+        for (i = 0; i < addresses.length; i++){
+               geocodeAddress(geocoder, map, addresses[i]);
+        }
+      }
+
+
+function geocodeAddress(geocoder, resultsMap, events) {
+    var infowindow = new google.maps.InfoWindow();
 
 
 
+      geocoder.geocode( { "address": events[0]}, function(results,status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+
+              var marker = new google.maps.Marker({
+                  position: results[0].geometry.location,
+                  map: resultsMap
+              });
+
+              google.maps.event.addListener(marker, "mouseover", function() {
+                      infowindow.setContent(events[1]);
+                      infowindow.open(resultsMap,marker);
+              });
+
+              google.maps.event.addListener(marker, "mouseout", function() {
+                     infowindow.close();
+              });
+
+          } else {
+            alert("Geocode was not successful for the following reason: " + status);
+          }
+      });
+
+
+}
+
+
+
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnj2eV9X-3Ri1W0DQOt-o_hHYVj2ox7Xs&callback=initMap">
+    </script>
 
          <!-- Detect if free user or not -->';
+
+         /* var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: "Hello World!" 
+        }); 
+
+
+        var contentString = "Study Break at Chipotle";
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString,
+          maxWidth: 200
+        });
+
+        marker.addListener("click", function() {
+          infowindow.open(map, marker);
+        });
+
+
+
+        */
+
+
          if ($row[isFree] == 1)
          {  
                   // ADS!!!!

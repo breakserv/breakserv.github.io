@@ -3,43 +3,8 @@
    $user = $_POST["User"];
    $pass = $_POST["Pass"] ;
 
-   if(!$user or !$pass){
-      echo "<html>";
-      echo "<title> Empty fields </title>";
-      echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
-      echo '<BODY BGCOLOR="#313131" TEXT = "white">';
-      echo "<br><br><br><br><br><h1><center>Empty Field. Please try again. Redirecting you back. </center></h1>";
-      echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=index.html">';
-      echo '</body>';
-      echo '</html>';
-
-   } else{
-       include ("readDb.php");
-
-       if($found == 0){
-
-          echo "<html>";
-          echo' <title> User does not exist </title>';
-          //echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
-          echo '<BODY BGCOLOR="#313131" TEXT = "white">';
-          echo '<br><br><br><br><br><center><h1> User not found. Please try again. Redirecting you back.</h1></center> ';
-          echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
-          echo '</body>';
-          echo ' </html>';
-
-        } else {
-              if($pass != $passdB){
-                echo "<html>";
-                echo ' <title> Incorrect Password </title>';
-                echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
-                echo '<BODY BGCOLOR="#313131" TEXT = "white">';
-                echo "<br><br><br><br><br><center><h1>Wrong password. Please try again. Redirecting you back.</h1></center> ";
-                echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
-                echo '</body>';
-                echo ' </html>';
-
-             } else {
-
+   // Connecting to MEMBERS database
+   include ("readDb.php");
 
 echo "<html>";
 
@@ -93,23 +58,19 @@ echo '<body id="page-top" class="index">
          <div class="row">
              <div class="col-lg-12 text-center">
                  <div class="intro-heading"><img src="http://atian.mycpanel2.princeton.edu/breakserv/img/BSLogo.png" width=80%></div>
-                 <h2 class="section-heading">Hi, ' .$row[fName]. '. Welcome back!</h2>';
-
-                 // CHECK IF USER IS NEW OR NOT. If new, display "get started here!" to start the authentication/scraping process.
-                 if ($row[isNew] == 1)
-                 {
-                    echo '<BR><BR><h3 class="service-heading text-muted">Start off by checking your email for events! [Python integration via button or new page]</h3>';
-                 } 
-                 else {
-                    // NOTE: THIS NEEDS TO BE CHANGED LATER TO ACTUAL EMAIL! (currently, only have username + pass info)
-                    echo '<h3 class="section-subheading text-muted">Here are your events from ' .$row[User]. ' email.</h3> 
-                          </div>
-                          </div>';
-                 }
+                 <h2 class="section-heading">'.$row[fName]. '\'s events</h2>';
 
         echo '<center>';
 
+         //Detect if free user or not
+         if ($row[isFree] == 1)
+         {  
+              // ADS!!!!
+              echo '<img src="ad.jpg" class="pull-left"><img src="ad.jpg" class="pull-right">';
+         }
+
         echo '<!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!! Code modified from Google code: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple -->
+              <!-- Note that code/Google maps API does not account for overlapping markers -->
         <BR><div id="map" style="width: 400px; height: 500px;"></div>
         <script>
 
@@ -126,7 +87,7 @@ echo '<body id="page-top" class="index">
 
           var i = 0; ';
 
-           // Pulling the event information for the user
+           // Pulling the EVENT information for the user
            include ("connectDb.php");
            $sqlt2 = "SELECT * FROM Events WHERE eUser = '$user' ";
            // Again, Send the request
@@ -191,41 +152,136 @@ echo '<body id="page-top" class="index">
         </script>
         <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnj2eV9X-3Ri1W0DQOt-o_hHYVj2ox7Xs&callback=initMap">
-        </script>
-
-         <!-- Detect if free user or not -->';
-         if ($row[isFree] == 1)
-         {  
-                  // ADS!!!!
-                  echo '<img src="ad.jpg" class="pull-left"><img src="ad.jpg" class="pull-right">
-
-                  <BR><BR><h3 class="service-heading text-muted">As a free user, you can store up to 5 events at once.</h3>
-                  <h3 class="section-subheading text-muted">What does a <a href="index.html#services" target="_blank">Premium membership</a> offer me?</h3>
-                  
-                  <form action="upgrade.php" method="post">';
-                  echo "<input type='hidden' name='User' value=$user />";
-                  echo "<input type='hidden' name='Pass' value=$pass />";
-                  echo '<button type="submit" class="btn btn-xl">Upgrade Premium</button>
-                  </form><BR><BR>';
-         } else {
-            echo '<h3 class="section-subheading text-muted">You are a Premium user!</h3>';
-         }
+        </script>';
 
 
-      echo '<!-- Button to display all events and add, edit, or delete any one of them -->
-         <form action="allevents.php" method="post">';
+        echo '<!-- Go back to login homepage --><BR><BR>
+         <form action="login.php" method="post">';
          echo "<input type='hidden' name='User' value=$user />";
          echo "<input type='hidden' name='Pass' value=$pass />";
-         echo '<button type="submit" class="btn btn-xl">View, Add, Delete, or Edit Your Events</button>
+         echo '<button type="submit" class="btn btn-xl">Go back Home</button>
          </form>
 
+        <BR> <!-- Display table of events + add/edit/delete marker -->';
+        echo "<CENTER> <TABLE BGCOLOR=white BORDER=1>";
+        echo "<TR BGCOLOR=white>";
+        echo '<TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>ID</h4></TH>
+              <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>EVENT NAME</h4>
+              <TD style="vertical-align: center; padding: 4px; text-align:center; width: 10%;"><h4>DATE</h4></TH>
+              <TD style="vertical-align: center; padding: 4px; text-align:center; width: 8%;"><h4>START TIME</h4></TH>
+              <TD style="vertical-align: center; padding: 4px; text-align:center; width: 8%;"><h4>END TIME</h4></TH>
+              <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>LOCATION</h4></TH>
+              <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>FOOD?</h4></TH>
+              <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>DETAILS</h4></TH>
+              </TR>';
 
-         <BR><BR>
-         <form action="index.html">
-            <button type="submit" class="btn btn-xl">Logout</button>
-         </form>
+        // Pulling the EVENT information for the user
+        include ("connectDb.php");
+        $sqlt2 = "SELECT * FROM Events WHERE eUser = '$user' ORDER BY startDate ASC";
+        // Again, Send the request
+        $result2 = mysql_query($sqlt2);
+        if (!$result2) {
+             die('SQL Error Getting User Information: ' . mysql_error());
+        } 
 
-</center>
+        while ($row2 = mysql_fetch_array($result2)) {
+            echo "<TR BGCOLOR=white>";
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'> ".$row2["eID"]." </p></TD>";
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'> ".$row2["eventName"]." </p></TD>";
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center; width: 10%;'><p class='text'> ".$row2["startDate"]." </p></TD>";
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center; width: 8%;'><p class='text'> ".$row2["startTime"]." </p></TD>";
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center; width: 8%;'><p class='text'> ".$row2["endTime"]." </p></TD>";
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'> ".$row2["eLocation"]." </p></TD>";
+            if ($row2[isFood] == 1) {
+                echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'>Yes!</p></TD>";
+            }
+            else {
+                echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'>No</p></TD>";
+            }
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'> ".$row2["eDetails"]." </p></TD>";
+            echo "</TR>";
+        }
+        mysql_close($conn);
+        echo '</table></center>';
+
+
+        echo '<BR><BR><BR><h2 class="section-heading">Delete an Event</H3>';
+        echo "<form name='delete' action='deleteEvent.php' method='post'>";
+        echo '<div class="row">
+             <div class="col-lg-12 text-center">
+                <FORM action="updateEvent.php" method="post">
+                     <div class="form-group">
+                         <input type="number" class="form-control" placeholder="Event ID" name="eID" required data-validation-required-message="Please enter the event ID.">
+                     </div>';
+                     echo "<input type='hidden' name='User' value=$user />";
+                     echo "<input type='hidden' name='Pass' value=$pass />";
+                     echo '<button type="submit" class="btn btn-xl">Delete</button>
+                </FORM>
+            </div>
+         </div>';
+
+        echo '<BR><BR><BR><h2 class="section-heading">Update or Add an Event</H3>';
+        echo "<form name='new' action='updateEvent.php' method='post'>";
+        echo '<p class="text-muted">Leave fields BLANK if you do not wish to change them.</p>';
+        echo '<div class="row">
+             <div class="col-lg-12 text-center">
+                <FORM action="updateEvent.php" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <input type="text" class="form-control" placeholder="ID (Leave blank to add a new event)" name="eID">
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Event Name" name="eName">
+                            </div>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Food? (1 = YES, 2 = NO)" name="isFood">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Start Date" name="startDate">
+                            </div>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                     <p class="text-muted"><i>Start time (left) and end time (right)</i></p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <input type="time" class="form-control" placeholder="Start Time" name="startTime">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <input type="time" class="form-control" placeholder="End Time" name="endTime">
+                            </div>
+                        </div>
+                     </div>
+
+                     <div class="form-group">
+                         <input type="text" class="form-control" placeholder="Location (Must include zip code and/or city and state) (150 character limit)" name="eLocation">
+                     </div>
+
+                     <div class="form-group">
+                         <textarea class="form-control" placeholder="Event details (150 character limit)" name="eDetails" rows="3"></textarea>
+                     </div>';
+                     echo "<input type='hidden' name='User' value=$user />";
+                     echo "<input type='hidden' name='Pass' value=$pass />";
+                     echo '<button type="submit" class="btn btn-xl">Add/Update</button></center>
+                </FORM>
+            </div>
+         </div>';
+
+    echo '</center>
     </section>
 
     <footer>
@@ -278,8 +334,7 @@ echo '<body id="page-top" class="index">
 
 </body>';
 echo '</html>';
-           }
-        }
-   }
+           
+        
 
  ?>

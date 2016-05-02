@@ -9,6 +9,7 @@
       //get variables
       $user = $_POST["User"];
       $pass = $_POST["Pass"];
+      $secretpass = $_POST["SecretPass"];
 
       if(!$pass){
 
@@ -62,12 +63,20 @@ echo '<body id="page-top" class="index">
                             <div class="form-group">
                             <input type="password" class="form-control" placeholder="Password *" name="Pass" required data-validation-required-message="Please enter your password.">';
                             echo "<input type='hidden' name='User' value=$user /><BR>";
+                            echo "<input type='hidden' name='SecretPass' value=$secretpass />";
                             echo '<button type="submit" class="btn btn-xl">Unsubscribe</button> 
                     </form>
                 </div>
-            </div><BR><BR><BR>
+            </div><BR>.<BR>.
 
-            <a href="index.html#login"> I want to keep my account. Return to Homepage. </a> <br>
+            <h3 class="service-heading text-muted">No, I want to keep my account.</h3>';
+            echo '<!-- Go back to login homepage -->
+            <form action="login.php" method="post">';
+            echo "<input type='hidden' name='User' value=$user />";
+            echo "<input type='hidden' name='Pass' value=$secretpass />";
+            echo '<button type="submit" class="btn btn-xl">Go back Home</button>
+            </form>
+
             </div>
             </div>
             </div>
@@ -132,7 +141,7 @@ echo '<body id="page-top" class="index">
                if (!result)
 	           echo ' <br><br><br><br><br><center><h1> <font color="red"> <b><i> Error. Please Try Again. </b></i></font> </h1> </center>';
                else
-	           echo '<br><br><br><br><br><center><h1> Unregistered from BreakServ. We hope you will reconsider us in the future. </font></h1></center>';
+	           echo '<br><br><br><br><br><center><h1> Unregistered from BreakServ. We hope you will reconsider us in the future! </font></h1></center>';
 	       echo '<META HTTP-EQUIV="REFRESH" CONTENT="2; URL=index.html">';
 	       echo '</html>';
 
@@ -140,7 +149,7 @@ echo '<body id="page-top" class="index">
          }
 
 	 else {
-	      echo '<br><br><br><br><br><center><h1>Password incorrect. Please try again. You will be redirected momentarily</h1></center>';
+	      echo '<br><br><br><br><br><center><h1>Password incorrect. Please try again. You will be redirected back home momentarily</h1></center>';
               sleep(3);
               echo '<form id="autologin" action="login.php" method="post">';
               echo "<input type='hidden' name='User' value=$user />";

@@ -217,8 +217,14 @@ echo '<body id="page-top" class="index">
          echo "<input type='hidden' name='User' value=$user />";
          echo "<input type='hidden' name='Pass' value=$pass />";
          echo '<button type="submit" class="btn btn-xl">View, Add, Delete, or Edit Your Events</button>
-         </form>
+         </form>';
 
+
+      echo '<BR><BR><form action="userprofile.php" method="post">';
+         echo "<input type='hidden' name='User' value=$user />";
+         echo "<input type='hidden' name='Pass' value=$pass />";
+         echo '<button type="submit" class="btn btn-xl">My Profile</button>
+         </form>
 
          <BR><BR>
          <form action="index.html">

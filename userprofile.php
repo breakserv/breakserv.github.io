@@ -142,8 +142,6 @@ echo '<body id="page-top" class="index">
                         </li>
                         <li><a href="pp.html" target="_blank">Privacy Policy</a>
                         </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
                     </ul>
                 </div>
             </div>

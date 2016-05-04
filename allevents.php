@@ -209,7 +209,7 @@ echo '<body id="page-top" class="index">
              <div class="col-lg-12 text-center">
                 <FORM action="updateEvent.php" method="post">
                      <div class="form-group">
-                         <input type="number" class="form-control" placeholder="Event ID (Type "ALL" exactly as written without quotations to delete all events)" name="eID" required data-validation-required-message="Please enter the event ID.">
+                         <input type="number" class="form-control" placeholder="Event ID (Type >ALL< exactly as written without > and < to delete all events)" name="eID" required data-validation-required-message="Please enter the event ID.">
                      </div>';
                      echo "<input type='hidden' name='User' value=$user />";
                      echo "<input type='hidden' name='Pass' value=$pass />";

@@ -63,7 +63,7 @@
       function listMessagesW() {
         req = gapi.client.gmail.users.getProfile({'userId': 'me'})
         req.execute(function(resp) {
-          appendPre(resp.emailAddress + '\n')
+          // appendpre(resp.emailAddress + '\n')
         })
         var queryDate = new Date()
         // alert(queryDate.getFullYear().toString() + "/" + (queryDate.getMonth() + 1).toString() + "/" + queryDate.getDate().toString())
@@ -86,7 +86,7 @@
        * @param  {Function} callback Function to call when the request is complete.
        */
       function listMessages(userId, query, callback) {
-        appendPre(query)
+        // appendpre(query)
         var getPageOfMessages = function(request, result, tR) {
           request.execute(function(resp) {
             result = result.concat(resp.messages);
@@ -100,7 +100,7 @@
               });
               getPageOfMessages(request, result, tR);
             } else {
-              appendPre(tR + " results found!\n");
+              // appendpre(tR + " results found!\n");
               for (i=0; i < result.length; i++) {
                 var msg = result[i]; // Only id, threadId
                 var fullmsgrequest = gapi.client.gmail.users.messages.get({
@@ -121,9 +121,9 @@
                       subj = resp.payload.headers[j].value
                     }
                   }
-                  appendPre('')
-                  appendPre(subj)
-                  appendPre(resp.id)
+                  // appendpre('')
+                  // appendpre(subj)
+                  // appendpre(resp.id)
 
                   var bodytext = ""
 
@@ -148,28 +148,28 @@
 
                   // for (j=0; j < resp.payload.parts.length; j++) {
                   //   var p = resp.payload.parts[j]
-                  //   // appendPre(p.mimeType)
+                  //   // // appendpre(p.mimeType)
                   //   if (p.mimeType.indexOf('multipart/') > -1) {
                   //     for (k = 0; k < p.parts.length; k++) {
                   //       var pp = p.parts[k]
-                  //       // appendPre(pp.mimeType)
+                  //       // // appendpre(pp.mimeType)
                   //       if (pp.mimeType.indexOf('text') > -1) {
                   //         var decoded = window.atob(Base64DecodeUrl(pp.body.data))
                   //         bodytext = bodytext + decoded
-                  //         // appendPre(pp.body.data)
-                  //         // appendPre(window.atob(Base64DecodeUrl(pp.body.data)))
+                  //         // // appendpre(pp.body.data)
+                  //         // // appendpre(window.atob(Base64DecodeUrl(pp.body.data)))
                   //       }
                   //     }
                   //   }
                   //   if (p.mimeType.indexOf('text') > -1) {
                   //     var decoded = window.atob(Base64DecodeUrl(p.body.data))
                   //     bodytext = bodytext + decoded
-                  //     // appendPre(p.body.data)
-                  //     // appendPre(window.atob(Base64DecodeUrl(p.body.data)))
+                  //     // // appendpre(p.body.data)
+                  //     // // appendpre(window.atob(Base64DecodeUrl(p.body.data)))
                   //   }
                   // }
 
-                  // appendPre(bodytext)
+                  // // appendpre(bodytext)
 
                   function uniques(arr) {
                      if (arr.length < 1) {
@@ -193,16 +193,16 @@
                     } else {
                       var date_fwded = bodytext.match(/Date:[^\n]+\n/).join('')
                     }
-                    appendPre('DATE of FORWARDED:' + date_fwded)
+                    // appendpre('DATE of FORWARDED:' + date_fwded)
                     bodytext = bodytext.replace(/From:[^\n]+\n/, '')
                     bodytext = bodytext.replace(/Date:[^\n]+\n/, '')
                     bodytext = bodytext.replace(/Subject:[^\n]+\n/, '')
                     bodytext = bodytext.replace(/To:[^\n]+\n/, '')
 
-                    // appendPre(bodytext)
+                    // // appendpre(bodytext)
                   }
 
-                  // appendPre(bodytext)
+                  // // appendpre(bodytext)
 
                   bodytext = subj + bodytext
                   var pattern_date = /(today|tonight|tomorrow night)|((this|next)\s(monday|tuesday|wednesday|thursday|friday|saturday|sunday))|((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(,\s?)?((january|february|march|april|may|june|july|august|september|october|november|december)(\s\d\d?))?)|(\d\d?\s(january|february|march|april|may|june|july|august|september|october|november|december))|((1|2|3|4|5|6|7|8|9|10|11|12)\/([012]?\d|30|31))|((january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s?([012]?\d|30|31))[^\d]/gi
@@ -210,15 +210,15 @@
                   if (found_date) {
                     found_date = uniques(found_date.join('|').toLowerCase().split('|'))
                   }
-                  // appendPre(found_date)
-                  // appendPre(bodytext.match(pattern_date))
+                  // // appendpre(found_date)
+                  // // appendpre(bodytext.match(pattern_date))
                   // var found_date = uniques(bodytext.match(pattern_date).join('|').toLowerCase().split('|'))
                   var pattern_time = /((1[012]|[1-9])(:[0-5][0-9])?(\s)?(am|pm)?(\s)?(\-|to)(\s)?)?(1[012]|[1-9])(:[0-5][0-9])?(\s)?(am|pm)/gi
                   var found_time = bodytext.match(pattern_time)
                   if (found_time) {
                     found_time = uniques(found_time)
                   }
-                  // appendPre(found_time)
+                  // // appendpre(found_time)
 
                   var pattern_food = /hoagies*|([a-zA-Z])*foods*|food|boba|bubbles*|tea|sushi|chipotle|qdoba|tacos*|crepes*|drinks*|yogurt|fruity*|pizza|wings*|cupcakes*|pretzels*|burgers*|indian|waffles*|chinese|italian|samosas*|rice|sodas*|dippin(\'|g|&#39;)*(\s)dots|ice(\s)cream|tea|coffee|s(\'|&#39;)*mores|chick\-fil\-a|chicken|duck|barbeque|bbq|ice|burritos*|starbucks|juice|sandwich(es)?|say(\s)cheez|baklava|muffins*|brownies*/gi
                   var found_food = bodytext.match(pattern_food)
@@ -237,11 +237,11 @@
                   // var found_place = uniques(found_place_pre.join('|').toLowerCase().split('|'))
 
                   // alert(found)
-                  // appendPre(bodytext)
-                  appendPre('DATES FOUND: ' + found_date)
-                  appendPre('TIMES FOUND: ' + found_time)
-                  appendPre('FOODS FOUND: ' + found_food)
-                  appendPre('PLACE FOUND: ' + found_place)
+                  // // appendpre(bodytext)
+                  // appendpre('DATES FOUND: ' + found_date)
+                  // appendpre('TIMES FOUND: ' + found_time)
+                  // appendpre('FOODS FOUND: ' + found_food)
+                  // appendpre('PLACE FOUND: ' + found_place)
 
                 })
               }
@@ -266,15 +266,15 @@
 
         request.execute(function(resp) {
           var labels = resp.labels;
-          appendPre('Labels:');
+          // appendpre('Labels:');
 
           if (labels && labels.length > 0) {
             for (i = 0; i < labels.length; i++) {
               var label = labels[i];
-              appendPre(label.name)
+              // appendpre(label.name)
             }
           } else {
-            appendPre('No Labels found.');
+            // appendpre('No Labels found.');
           }
         });
       }
@@ -285,7 +285,7 @@
        *
        * @param {string} message Text to be placed in pre element.
        */
-      function appendPre(message) {
+      function appendpre(message) {
         // var pre = document.getElementById('output');
         // var textContent = document.createTextNode(message + '\n');
         // pre.appendChild(textContent);

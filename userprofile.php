@@ -110,7 +110,7 @@ echo '<body id="page-top" class="index">
               echo '<BR><center><img src="kk.JPG">';
          }
 
-        echo '<!-- Go back to login homepage -->
+        echo '<!-- Go back to login homepage --><center>
          <form action="login.php" method="post">';
          echo "<input type='hidden' name='User' value=$user />";
          echo "<input type='hidden' name='Pass' value=$pass />";

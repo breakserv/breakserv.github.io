@@ -105,9 +105,8 @@ echo '<body id="page-top" class="index">
                 addresses[i][3] = 0;
                 addresses[i][4] = "' . $row2[eventName] . '";
                 addresses[i][5] = "' . $row2[startDate] . '";
-                addresses[i][6] = "' . $row2[startTime] . '";
-                addresses[i][7] = "' . $row2[endTime] . '";
-                addresses[i][8] = "' . $row2[isFood] . '";
+                addresses[i][6] = "' . $row2[eTime] . '";
+                addresses[i][7] = "' . $row2[isFood] . '";
                 i++; ';
            }
 
@@ -132,10 +131,10 @@ echo '<body id="page-top" class="index">
                       });
 
                       google.maps.event.addListener(marker, "mouseover", function() {
-                              if (events[8] == 1) {
-                                  infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + " to " + events[7] + "<br><b>Food?</b> Yes! <br><b>Details: </b>" + events[1]);
+                              if (events[7] == 1) {
+                                  infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + "<br><b>Food?</b> Yes! <br><b>Details: </b>" + events[1]);
                               }
-                              else infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + " to " + events[7] + "<br><b>Food?</b> No <br><b>Details: </b>" + events[1]);
+                              else infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + "<br><b>Food?</b> No <br><b>Details: </b>" + events[1]);
                               infowindow.open(resultsMap,marker);
                       });
 
@@ -148,6 +147,7 @@ echo '<body id="page-top" class="index">
                   }
               });
         }
+
 
         </script>
         <script async defer
@@ -168,8 +168,7 @@ echo '<body id="page-top" class="index">
         echo '<TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>ID</h4></TH>
               <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>EVENT NAME</h4>
               <TD style="vertical-align: center; padding: 4px; text-align:center; width: 10%;"><h4>DATE</h4></TH>
-              <TD style="vertical-align: center; padding: 4px; text-align:center; width: 8%;"><h4>START TIME</h4></TH>
-              <TD style="vertical-align: center; padding: 4px; text-align:center; width: 8%;"><h4>END TIME</h4></TH>
+              <TD style="vertical-align: center; padding: 4px; text-align:center; width: 15%;"><h4>TIME</h4></TH>
               <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>LOCATION</h4></TH>
               <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>FOOD?</h4></TH>
               <TD style="vertical-align: center; padding: 4px; text-align:center;"><h4>DETAILS</h4></TH>
@@ -189,8 +188,7 @@ echo '<body id="page-top" class="index">
             echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'> ".$row2["eID"]." </p></TD>";
             echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'> ".$row2["eventName"]." </p></TD>";
             echo "<TD style='vertical-align: center; padding: 4px; text-align:center; width: 10%;'><p class='text'> ".$row2["startDate"]." </p></TD>";
-            echo "<TD style='vertical-align: center; padding: 4px; text-align:center; width: 8%;'><p class='text'> ".$row2["startTime"]." </p></TD>";
-            echo "<TD style='vertical-align: center; padding: 4px; text-align:center; width: 8%;'><p class='text'> ".$row2["endTime"]." </p></TD>";
+            echo "<TD style='vertical-align: center; padding: 4px; text-align:center; width: 8%;'><p class='text'> ".$row2["eTime"]." </p></TD>";
             echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'> ".$row2["eLocation"]." </p></TD>";
             if ($row2[isFood] == 1) {
                 echo "<TD style='vertical-align: center; padding: 4px; text-align:center;'><p class='text'>Yes!</p></TD>";
@@ -253,18 +251,8 @@ echo '<body id="page-top" class="index">
                         </div>
                      </div>
 
-                     <div class="row">
-                     <p class="text-muted"><i>Start time (left) and end time (right)</i></p>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                            <input type="time" class="form-control" placeholder="Start Time" name="startTime">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                            <input type="time" class="form-control" placeholder="End Time" name="endTime">
-                            </div>
-                        </div>
+                     <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Start Time and End Time (input as text)" name="eTime">
                      </div>
 
                      <div class="form-group">

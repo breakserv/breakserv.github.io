@@ -19,8 +19,7 @@ CREATE TABLE Events (
     eUser varchar(30),
     eventName varchar(30),
     startDate date,
-    startTime time,
-    endTime time,
+    eTime varchar(30),
     eLocation varchar(150),
     isFood binary(1),
     eDetails varchar(150)

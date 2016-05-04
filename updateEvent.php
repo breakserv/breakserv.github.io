@@ -10,8 +10,7 @@
       $eName = $_POST["eName"];
       $isFood= $_POST["isFood"];
       $startDate = $_POST["startDate"];
-      $startTime = $_POST["startTime"];
-      $endTime = $_POST["endTime"];
+      $eTime = $_POST["eTime"];
       $eLocation = $_POST["eLocation"];
       $eDetails = $_POST["eDetails"];
 
@@ -24,10 +23,10 @@
       if (!$eID) {
             echo "<br><br><br><br><br><center><h1><b><i>Adding event now...</h1></center>";
             if ($isFood == 1) {
-                  $sql = "INSERT INTO Events (eID, eUser, eventName, startDate, startTime, endTime, eLocation, isFood, eDetails) VALUES ('$eID', '$user', '$eName', '$startDate', '$startTime', '$endTime', '$eLocation', '$isFood', '$eDetails')";
+                  $sql = "INSERT INTO Events (eID, eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$eID', '$user', '$eName', '$startDate', '$eTime', '$eLocation', '$isFood', '$eDetails')";
             }
             else {
-                  $sql = "INSERT INTO Events (eID, eUser, eventName, startDate, startTime, endTime, eLocation, isFood, eDetails) VALUES ('$eID', '$user', '$eName', '$startDate', '$startTime', '$endTime', '$eLocation', 0, '$eDetails')";
+                  $sql = "INSERT INTO Events (eID, eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$eID', '$user', '$eName', '$startDate', '$eTime', '$eLocation', 0, '$eDetails')";
             }
       } else {
             echo "<br><br><br><br><br><center><h1><b><i>Updating event now...</h1></center>";
@@ -44,11 +43,8 @@
             if ($startDate) {
                   $sql = "UPDATE Events SET startDate='$startDate' WHERE eID = '$eID' AND eUser='$user'";
             }
-            if ($startTime) {
-                  $sql = "UPDATE Events SET startTime='$startTime' WHERE eID = '$eID' AND eUser='$user'";
-            }
-            if ($endTime) {
-                  $sql = "UPDATE Events SET endTime='$endTime' WHERE eID = '$eID' AND eUser='$user'";
+            if ($eTime) {
+                  $sql = "UPDATE Events SET eTime='$eTime' WHERE eID = '$eID' AND eUser='$user'";
             }
             if ($eLocation) {
                   $sql = "UPDATE Events SET eLocation='$eLocation' WHERE eID = '$eID' AND eUser='$user'";

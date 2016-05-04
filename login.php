@@ -167,9 +167,8 @@ echo '<body id="page-top" class="index">
                 addresses[i][3] = 0;
                 addresses[i][4] = "' . $row2[eventName] . '";
                 addresses[i][5] = "' . $row2[startDate] . '";
-                addresses[i][6] = "' . $row2[startTime] . '";
-                addresses[i][7] = "' . $row2[endTime] . '";
-                addresses[i][8] = "' . $row2[isFood] . '";
+                addresses[i][6] = "' . $row2[eTime] . '";
+                addresses[i][7] = "' . $row2[isFood] . '";
                 i++; ';
            }
 
@@ -194,10 +193,10 @@ echo '<body id="page-top" class="index">
                       });
 
                       google.maps.event.addListener(marker, "mouseover", function() {
-                              if (events[8] == 1) {
-                                  infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + " to " + events[7] + "<br><b>Food?</b> Yes! <br><b>Details: </b>" + events[1]);
+                              if (events[7] == 1) {
+                                  infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + "<br><b>Food?</b> Yes! <br><b>Details: </b>" + events[1]);
                               }
-                              else infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + " to " + events[7] + "<br><b>Food?</b> No <br><b>Details: </b>" + events[1]);
+                              else infowindow.setContent("<b>Event: </b>" + events[4] + "<br><b>Location: </b>" + events[0] + "<br><b>Date: </b>" + events[5] + " at " + events[6] + "<br><b>Food?</b> No <br><b>Details: </b>" + events[1]);
                               infowindow.open(resultsMap,marker);
                       });
 

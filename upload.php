@@ -5,106 +5,68 @@
      $coded_time = $_GET["time"];
      $coded_food = $_GET["food"];
      $coded_place = $_GET["place"];
-     $coded_user = $_GET["user"];
 
-     $decoded_eName = base64_decode($date); 
-     $decoded_date = base64_decode($date);
-     $decoded_time = base64_decode($date);
-     $decoded_food = base64_decode($date);
-     $decoded_place = base64_decode($date);
-     $decoded_user = base64_decode($date);
+     $user = $_GET["user"];
 
-     echo 'Success!';
+     // Decode everything
+     if (strcmp($coded_eventname,"null") != 0) $eName = base64_decode($coded_eventname);
+     else $eName = NULL; 
+
+     if (strcmp($coded_date,"null") != 0) $startDate = base64_decode($coded_date); 
+     else $startDate = NULL;
+
+     if (strcmp($coded_time,"null") != 0) $eTime = base64_decode($coded_time); 
+     else $eTime = NULL;
+
+     if (strcmp($coded_food,"null") != 0) $foodTypes = base64_decode($coded_food); 
+     else $foodTypes = NULL;
+
+     if (strcmp($coded_place,"null") != 0) $eLocation = base64_decode($coded_place); 
+     else $eLocation = NULL;
+
      include ("connectDb.php");
-     echo '<BR>' .$name;
-          echo '<BR>' .$decoded_date;
-          echo '<BR>' .$time;
-          echo '<BR>' .$food;
-          echo '<BR>' .$place;
-          echo '<BR>' .$user;
-     
-     //$sql2 = "INSERT INTO Events (eUser) VALUES ('x')";
-     $sql = "INSERT INTO Events (eUser, eventName, eLocation, eDetails) VALUES ('$user', '$name', '$place', '$food')";
-     $result = mysql_query($sql);
-     //$result2 = mysql_query($sql2);
+     include ("readDb.php");
+     //      echo '<BR>' .$eName;
+     //      echo '<BR>' .$startDate;
+     //      echo '<BR>' .$eTime;
+     //      echo '<BR>' .$foodTypes;
+     //      echo '<BR>' .$eLocation;
+     //      echo '<BR>' .$user;
 
-      if ($result==1){
+      // If new user (first time user), update so that they are no longer a user
+     if ($row[isNew] == 1) {
+            $sql2 = "UPDATE Members SET isNew=0 WHERE User='$user'";
+            $result2 = mysql_query($sql2);
+     }
+
+     // FREE USERS can only have up to 5 events stored in the database
+     // If currcount < 5, add new events until it's full
+     // If currcount = 5, delete everything and add until it's full (or until there are no emails left, whichever is first)
+
+      
+      // PREMIUM USERS can add in as many events as they want . Simply update currCount with it
+     if ($row[isFree] == 0) {
+            // Add to database (depending on whether the event has food or not)
+            if (!$foodTypes) {
+                  $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$user', '$eName', '$startDate', '$eTime', '$eLocation', 0, '$foodTypes')";
+                  $result2 = mysql_query($sql2);
+            }
+            else {
+                  $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$user', '$eName', '$startDate', '$eTime', '$eLocation', 1, '$foodTypes')";
+                  $result2 = mysql_query($sql2);
+            }
+
+            // Update currCount if successful
+            if ($result2==1){
+                  $newCount = $row[CurrCount] + 1;
+                  $sql2 = "UPDATE Members SET CurrCount='$newCount' WHERE User='$user'";
+                  $result2 = mysql_query($sql2);
+            } else die('Invalid query: ' . mysql_error());
+     }
+
+      /*if ($result2==1){
             // echo ' <br> <font color="red"> New User Added! </font> '; 
             // sleep(1);
-            echo 'real success';
-      } else die('Invalid query: ' . mysql_error());
-
-
-     // Set the variable $q equal to whatever follows the "?query=" in the URL
-     /* $q = $_GET["query"];
-     $t = $_GET["searchtype"];
-
-     if (!$q){  // If the "query" line is blank, display the search page
-
-         // The following echo commands generate standard HTML output for the browser to view.
-         echo "<HTML>";
-         echo "<TITLE> ORF 401: Assignment #1 - PHP - Spring 2016 </TITLE>";
-         echo "<BODY>";
-
-         echo '<center>';
-         echo "<br><br>";
-         echo "<h1>Ride share with Pear!</h1>";
-         echo "<img src='Logo.png' /> <br><br>";   // adding a picture
-         echo '<BODY BGCOLOR="#c5d9c1" TEXT = "black">';   // setting background color
-
-         echo "Enter a single origin/destination to search for. <br>";
-             echo "Type a 2-letter state abbreviation such as NY.<br><br>";
-
-         // Notice the creation of a form in HTML.
-
-         // <form action= ""> tells says which page to send the results of the form to.
-         // <input type="text"> denotes a text input, the name="query" part
-         echo '<form action="isindexSearch.php" method="get">';
-         echo '<input type="text" name="query" />';
-             
-         echo '<select name="searchtype">';
-         echo '<option value="origin">Origin</option>';
-         echo '<option value="destination">Destination</option>';
-         echo '</select>';
-            
-         echo '<input type="submit" />';
-         echo '</form>';      // End the Form    
-             
-             
-        echo '</center>';
-         // Closing HTML
-         echo "</BODY>";
-         echo "</HTML>";
-
-     } else { // In this case, else means that there was some kind of data passed to the PHP script in the URL
-
-
-        echo "<HTML>";
-        echo "<TITLE> ORF 401: Assignment #1 - PHP - Search Results for " . $q . " </TITLE>";
-        echo '<BODY BGCOLOR="#c5d9c1" TEXT = "black">';
-
-        echo '<center>';
-        echo "Searching for " . $q . " as " . $t . " <br><br>";
-            
-            echo "<a href=\"http://atian.mycpanel2.princeton.edu/ORF401/lab1/isindexSearch.php\"><img src='HOME.png' /></a>";
-
-        //echo "<br> DEBUG: Attempting to Execute the command <br>";
-
-        // This is the java program we want to run and the parameters we want to pass to it.
-        // You could also use:
-        // $string = "ls"
-        // or something as a test.
-
-        $string = "/usr/bin/java -Dformat=html RidersSearchServer newriders.dat " . $q . " " . $t;
-
-        // echo $string . '<br><br>';
-
-        // Tell the server to run the command, which launches Java, and store the results in the variable $output
-        $output = shell_exec($string);
-
-        echo $output;
-        echo '</center>';
-        echo "</BODY>";
-        echo "</HTML>";
-     } */
+            //echo 'real success';
+      } else die('Invalid query: ' . mysql_error());*/
 ?>

@@ -185,6 +185,7 @@
                       return a;
                   }
 
+                  var date_of_email_sent = ""
                   bodytext = bodytext.replace(/<[^>]+>/g, '')
                   if (subj.indexOf('Fwd:') > -1) { // Forwarded email
                     bodytext = bodytext.replace(/[-]+ Forwarded message [-]+/g, '')
@@ -196,19 +197,31 @@
                     } else {
                       var date_fwded = bodytext.match(/Date:[^\n]+\n/).join('')
                     }
-                    appendPre('DATE of FORWARDED:' + date_fwded)
+                    var date_of_email_sent = date_fwded.match(/(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s([012]?\d|30|31),\s\d\d\d\d/i)[0]
                     bodytext = bodytext.replace(/From:[^\n]+\n/, '')
                     bodytext = bodytext.replace(/Date:[^\n]+\n/, '')
                     bodytext = bodytext.replace(/Subject:[^\n]+\n/, '')
                     bodytext = bodytext.replace(/To:[^\n]+\n/, '')
 
                     // appendPre(bodytext)
+                  } else {
+                    var hdrs = resp.payload.headers
+                    var dateval = "Mon, 10 Jan 0000"
+                    for (y=0;y<hdrs.length;y++) {
+                      if (hdrs[y].name == "Received") {
+                        dateval = hdrs[y].value
+                        break
+                      }
+                    }
+                    date_of_email_sent = dateval.match(/(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s([012]?\d|30|31)\s(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s\d\d\d\d/i)[0]
                   }
+
+                  appendPre("DATE SENT: " + date_of_email_sent)
 
                   // appendPre(bodytext)
 
                   bodytext = subj + bodytext
-                  var pattern_date = /(today|tonight|tomorrow night)|((this|next)\s(monday|tuesday|wednesday|thursday|friday|saturday|sunday))|((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(,\s?)?((january|february|march|april|may|june|july|august|september|october|november|december)(\s\d\d?))?)|(\d\d?\s(january|february|march|april|may|june|july|august|september|october|november|december))|((1|2|3|4|5|6|7|8|9|10|11|12)\/([012]?\d|30|31))|((january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s?([012]?\d|30|31))[^\d]/gi
+                  var pattern_date = /(today|tonight|tomorrow)(\s(morning|noon|afternoon|evening|night))?|((this|next)\s(monday|tuesday|wednesday|thursday|friday|saturday|sunday))|((monday|tuesday|wednesday|thursday|friday|saturday|sunday)(,\s?)?((january|february|march|april|may|june|july|august|september|october|november|december)(\s\d\d?))?)|(\d\d?\s(january|february|march|april|may|june|july|august|september|october|november|december))|((1|2|3|4|5|6|7|8|9|10|11|12)\/([012]?\d|30|31))|((january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s?([012]?\d|30|31))[^\d]/gi
                   var found_date = bodytext.match(pattern_date)
                   if (found_date) {
                     found_date = uniques(found_date.join('|').toLowerCase().split('|'))
@@ -241,7 +254,36 @@
 
                   // alert(found)
                   // appendPre(bodytext)
-                  appendPre('DATES FOUND: ' + found_date)
+                  if (found_date) {
+                    // var date_encoded = window.btoa(found_date.join('|')))
+                    if (found_date[0].toLowerCase() == "tonight") {
+                      var found_date_disp = 'tonight (' + date_of_email_sent + ')'
+                      var date_encoded = window.btoa(date_of_email_sent)
+                    } else if (found_date[0].toLowerCase() == "today") {
+                      var found_date_disp = 'tonight (' + date_of_email_sent + ')'
+                      var date_encoded = window.btoa(date_of_email_sent)
+                    } else if (found_date[0].toLowerCase().indexOf("tomorrow") > -1) {
+                      // if (date_of_email_sent.test(/(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s([012]?\d|30|31),\s\d\d\d\d/i)) {
+                        var daynum = parseInt(date_of_email_sent.match(/([012]?\d|30|31),/)[0].match(/([012]?\d|30|31)/)[0])
+                        var yrnum = parseInt(date_of_email_sent.match(/\d\d\d\d/)[0])
+                        var mostr = date_of_email_sent.match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)/i)[0].toLowerCase()
+                        var mo2num = {'jan':0, 'feb':1, 'mar':2, 'apr':3, 'may':4, 'jun':5, 'jul':6, 'aug':7, 'sep':8, 'oct':9, 'nov':10, 'dec':11}
+                        var monum = parseInt(mo2num[mostr])
+                        var datedate = new Date()
+                        datedate.setDate(daynum)
+                        datedate.setFullYear(yrnum)
+                        datedate.setMonth(monum)
+                        datedate.setDate(datedate.getDate() + 1)
+                        var found_date_disp = 'tomorrow (' + datedate.toDateString() + ')'
+                        var date_encoded = window.btoa(datedate.toDateString())
+                    } else {
+                      var date_encoded = window.btoa(found_date[0])
+                      var found_date_disp = found_date
+                    }
+                  } else {
+                    var date_encoded = "null"
+                  }
+                  appendPre('DATES FOUND: ' + found_date_disp)
                   appendPre('TIMES FOUND: ' + found_time)
                   appendPre('FOODS FOUND: ' + found_food)
                   appendPre('PLACE FOUND: ' + found_place)
@@ -249,12 +291,6 @@
                   // Request string
                   var subj_encoded = window.btoa(subj)
                   // appendPre(subj + '\n' + subj_encoded)
-                  if (found_date) {
-                    // var date_encoded = window.btoa(found_date.join('|')))
-                    var date_encoded = window.btoa(found_date[0])
-                  } else {
-                    var date_encoded = "null"
-                  }
                   // appendPre(found_date + '\n' + date_encoded)
                   if (found_time) {
                     // var time_encoded = window.btoa(found_time.join('|')))

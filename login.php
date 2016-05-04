@@ -124,7 +124,7 @@ echo '<body id="page-top" class="index">
     <pre id="output" hidden></pre>';
 
                     if ($row[isFree] == 1) {
-                        echo '<BR><BR><h3 class="section-subheading text-muted">WARNING. As a free user, you are able to store up to 5 slots. Currently, you are storing '.$row[CurrCount].' events. <BR>If you are storing less than 5 events, scraping will add new events until all slots are filled (nothing will be overwritten). <BR>If you are storing the maximum of 5 events, scraping will overwrite events that you have right now.</h3>';
+                        echo '<BR><BR><h3 class="section-subheading text-muted">WARNING. As a free user, you are able to store up to 5 slots. Currently, you are storing '.$row[CurrCount].' events. <BR>If you are storing less than 5 events, scraping will add new events until all slots are filled (nothing will be overwritten). <BR>If you are storing the maximum of 5 events, scraping will delete everything and start again from the last time you authorized us to scrape.</h3>';
                     } else {
                         echo '<BR><BR><h3 class="section-subheading text-muted">Currently, you have ' .$row[CurrCount].' events stored with us.</h3>';
                     }

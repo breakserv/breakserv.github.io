@@ -124,7 +124,7 @@ echo '<body id="page-top" class="index">
     <pre id="output" hidden></pre>';
 
                     if ($row[isFree] == 1) {
-                        echo '<BR><BR><BR><h4 class="text-muted">WARNING.</h4><h3 class="section-subheading text-muted">As a free user, you are only able to store up to 5 events.<BR>Scraping will not overwrite any of your current events.<BR>If you have hit the max, please register for Premium or delete events to make space.</h3> <h4 class="text-muted">Currently, you are storing '.$row[CurrCount].' events. </h4>';
+                        echo '<BR><BR><BR><h4 class="text-muted">WARNING.</h4><h3 class="section-subheading text-muted">As a free user, you are only able to store up to 5 events.<BR>Scraping will not overwrite any of your current events.<BR>If you have hit the max, please register for Premium or delete events to make space.</h3> <h4 class="text-muted">Currently, you have '.$row[CurrCount].' events stored with us. </h4>';
                     } else {
                         echo '<BR><BR><h3 class="section-subheading text-muted">Currently, you have ' .$row[CurrCount].' events stored with us.</h3>';
                     }

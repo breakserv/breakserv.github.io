@@ -71,7 +71,7 @@ echo '<body id="page-top" class="index">
 
         echo '<!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!! Code modified from Google code: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple -->
               <!-- Note that code/Google maps API does not account for overlapping markers -->
-        <BR><div id="map" style="width: 400px; height: 500px;"></div>
+        <BR><div id="map" style="width: 450px; height: 500px;"></div>
         <script>
 
         function initMap() {

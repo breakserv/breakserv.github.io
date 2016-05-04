@@ -112,7 +112,7 @@ echo '<body id="page-top" class="index">
         Authorize
       </button>
     </div>
-    <pre id="output"></pre>';
+    <pre id="output" hidden></pre><BR>';
                  } 
                  else {
                   echo '<div id="authorize-div" class="container">
@@ -121,7 +121,7 @@ echo '<body id="page-top" class="index">
         Scrape Email
       </button>
     </div>
-    <pre id="output"></pre>';
+    <pre id="output" hidden></pre>';
 
                     if ($row[isFree] == 1) {
                         echo '<BR><BR><h3 class="section-subheading text-muted">WARNING. As a free user, you are able to store up to 5 slots. Currently, you are storing '.$row[CurrCount].' events. <BR>If you are storing less than 5 events, scraping will add new events until all slots are filled (nothing will be overwritten). <BR>If you are storing the maximum of 5 events, scraping will overwrite events that you have right now.</h3>';
@@ -133,7 +133,7 @@ echo '<body id="page-top" class="index">
         echo '<center>';
 
         echo '<!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!! Code modified from Google code: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple -->
-        <div id="map" style="width: 400px; height: 500px;"></div>
+        <div id="map" style="width: 450px; height: 500px;"></div>
         <script>
 
         function initMap() {

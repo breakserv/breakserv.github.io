@@ -21,7 +21,9 @@
      if (strcmp($coded_food,"null") != 0) $foodTypes = base64_decode($coded_food); 
      else $foodTypes = NULL;
 
-     if (strcmp($coded_place,"null") != 0) $eLocation = base64_decode($coded_place); 
+     if (strcmp($coded_place,"null") != 0) {
+            $eLocation = base64_decode($coded_place) . " Princeton, NJ 08544"; 
+      }
      else $eLocation = NULL;
 
      include ("readDb.php");

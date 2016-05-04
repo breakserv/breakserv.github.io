@@ -96,6 +96,11 @@ echo '<body id="page-top" class="index">
              <div class="col-lg-12 text-center">
                  <div class="intro-heading"><img src="http://atian.mycpanel2.princeton.edu/breakserv/img/BSLogo.png" width=80%></div>
                  <h2 class="section-heading">Hi, ' .$row[fName]. '. Welcome back!</h2>';
+                 echo '<p id="username_hidden" hidden>' .$user. '</p>';
+                 echo '<div><p hidden>Request string:</p><p id="phprequest" hidden></p></div>
+    <p id="username_hidden" hidden>atian</p>
+    <div><button onclick="sendrequests(event) class="btn btn-xl"">Make Requests</button></div>
+    <div><p id="printrequests" hidden></p></div>';
 
                  // CHECK IF USER IS NEW OR NOT. If new, display "get started here!" to start the authentication/scraping process.
                  if ($row[isNew] == 1)
@@ -117,8 +122,6 @@ echo '<body id="page-top" class="index">
       </button>
     </div>
     <pre id="output"></pre>';
-                    // NOTE: THIS NEEDS TO BE CHANGED LATER TO ACTUAL EMAIL! (currently, only have username + pass info)
-                    // Include a button to allow the user to refresh???????
 
                     if ($row[isFree] == 1) {
                         echo '<BR><BR><h3 class="section-subheading text-muted">WARNING. As a free user, you are able to store up to 5 slots. Currently, you are storing '.$row[CurrCount].' events. <BR>If you are storing less than 5 events, scraping will add new events until all slots are filled (nothing will be overwritten). <BR>If you are storing the maximum of 5 events, scraping will overwrite events that you have right now.</h3>';

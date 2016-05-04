@@ -1,3 +1,6 @@
+      function Base64EncodeUrl(str){
+          return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
+      }
 
       function Base64DecodeUrl(str){
           str = (str + '===').slice(0, str.length + (str.length % 4));
@@ -243,6 +246,45 @@
                   appendPre('FOODS FOUND: ' + found_food)
                   appendPre('PLACE FOUND: ' + found_place)
 
+                  // Request string
+                  var subj_encoded = window.btoa(subj)
+                  // appendPre(subj + '\n' + subj_encoded)
+                  if (found_date) {
+                    // var date_encoded = window.btoa(found_date.join('|')))
+                    var date_encoded = window.btoa(found_date[0])
+                  } else {
+                    var date_encoded = "null"
+                  }
+                  // appendPre(found_date + '\n' + date_encoded)
+                  if (found_time) {
+                    // var time_encoded = window.btoa(found_time.join('|')))
+                    var time_encoded = window.btoa(found_time[0])
+                  } else {
+                    var time_encoded = "null"
+                  }
+                  // appendPre(found_time + '\n' + time_encoded)
+                  if (found_food) {
+                    var food_encoded = window.btoa(found_food.join('|'))
+                  } else {
+                    var food_encoded = "null"
+                  }
+                  // appendPre(found_food + '\n' + food_encoded)
+                  if (found_place) {
+                    // var place_encoded = window.btoa(found_place.join('|')))
+                    var place_encoded = window.btoa(found_place[0])
+                  } else {
+                    var place_encoded = "null"
+                  }
+
+                  var usrnm = document.getElementById('username_hidden').innerHTML
+
+                  // appendPre(found_place + '\n' + place_encoded)
+                  request_ind = 'name='+subj_encoded+'&date='+date_encoded+'&time='+time_encoded+'&food='+food_encoded+'&place='+place_encoded+"&user="+usrnm
+                  appendPre(request_ind)
+
+                  var req = document.getElementById('phprequest');
+                  req.innerHTML = req.innerHTML + request_ind + "___"
+
                 })
               }
             }
@@ -253,6 +295,40 @@
           'q': query
         });
         getPageOfMessages(initialRequest, [], 0);
+      }
+
+
+      function sendrequests(event) {
+        var req = document.getElementById('phprequest');
+        var requests = req.innerHTML.split("___")
+        var nReq = requests.length - 1
+        var nRequest = new Array()
+
+        for (var i=0; i<nReq; i++) {
+          document.getElementById('printrequests').innerHTML = document.getElementById('printrequests').innerHTML + "\n" + requests[i]
+        }
+
+        // Simultaneous JS XML HTTP Requests
+        for (var i=0; i<nReq; i++){
+           (function(i) {
+              nRequest[i] = new XMLHttpRequest();
+              // alert(requests[i])
+              nRequest[i].open("GET", 'http://atian.mycpanel2.princeton.edu/breakserv/upload.php?'+requests[i], true);
+              nRequest[i].onreadystatechange = function (oEvent) {
+                 if (nRequest[i].readyState === 4) {
+                    if (nRequest[i].status === 200) {
+                      console.log(nRequest[i].responseText);
+                      alert(nRequest[i].responseText);
+                    } else {
+                      console.log("Error", nRequest[i].statusText);
+                    }
+                 }
+              };
+              nRequest[i].send();
+              // alert("sent!")
+           })(i);
+        }
+
       }
 
       /**
@@ -286,8 +362,7 @@
        * @param {string} message Text to be placed in pre element.
        */
       function appendPre(message) {
-        // var pre = document.getElementById('output');
-        // var textContent = document.createTextNode(message + '\n');
-        // pre.appendChild(textContent);
-        return
+        var pre = document.getElementById('output');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
       }

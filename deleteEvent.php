@@ -33,7 +33,7 @@
 
             if ($result2==1){
                   $newCount = $row[CurrCount] - 1;
-                  echo '<BR>'.$newCount;
+                  //echo '<BR>'.$newCount;
                   $sql = "UPDATE Members SET CurrCount = '$newCount' WHERE User='$user'";
                   $result = mysql_query($sql);
                   sleep(2);

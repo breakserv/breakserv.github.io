@@ -176,7 +176,7 @@ echo '<body id="page-top" class="index">
 
         // Pulling the EVENT information for the user
         include ("connectDb.php");
-        $sqlt2 = "SELECT * FROM Events WHERE eUser = '$user' ORDER BY startDate ASC";
+        $sqlt2 = "SELECT * FROM Events WHERE eUser = '$user' ORDER BY isFood DESC";
         // Again, Send the request
         $result2 = mysql_query($sqlt2);
         if (!$result2) {

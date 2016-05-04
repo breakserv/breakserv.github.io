@@ -18,7 +18,7 @@ CREATE TABLE Events (
     eID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     eUser varchar(30),
     eventName varchar(30),
-    startDate date,
+    startDate varchar(30),
     eTime varchar(30),
     eLocation varchar(150),
     isFood binary(1),

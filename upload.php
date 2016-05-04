@@ -3,11 +3,16 @@
      $coded_eventname = $_GET["name"];
      $coded_date = $_GET["date"];
      $coded_time = $_GET["time"];
-     $food = $_GET["food"];
-     $place = $_GET["place"];
-     $user = $_GET["user"];
+     $coded_food = $_GET["food"];
+     $coded_place = $_GET["place"];
+     $coded_user = $_GET["user"];
 
+     $decoded_eName = base64_decode($date); 
      $decoded_date = base64_decode($date);
+     $decoded_time = base64_decode($date);
+     $decoded_food = base64_decode($date);
+     $decoded_place = base64_decode($date);
+     $decoded_user = base64_decode($date);
 
      echo 'Success!';
      include ("connectDb.php");

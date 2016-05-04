@@ -9,7 +9,7 @@
       echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
       echo '<BODY BGCOLOR="#313131" TEXT = "white">';
       echo "<br><br><br><br><br><h1><center>Empty Field. Please try again. Redirecting you back. </center></h1>";
-      echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=index.html">';
+      echo '<META HTTP-EQUIV="REFRESH" CONTENT="1; URL=index.html#login">';
       echo '</body>';
       echo '</html>';
 
@@ -23,7 +23,7 @@
           //echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
           echo '<BODY BGCOLOR="#313131" TEXT = "white">';
           echo '<br><br><br><br><br><center><h1> User not found. Please try again. Redirecting you back.</h1></center> ';
-          echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
+          echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html#login">';
           echo '</body>';
           echo ' </html>';
 
@@ -34,7 +34,7 @@
                 echo '<STYLE TYPE="text/css">BODY { font-family:sans-serif;}</STYLE>';
                 echo '<BODY BGCOLOR="#313131" TEXT = "white">';
                 echo "<br><br><br><br><br><center><h1>Wrong password. Please try again. Redirecting you back.</h1></center> ";
-                echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html">';
+                echo '<META HTTP-EQUIV="REFRESH" CONTENT="3; URL=index.html#login">';
                 echo '</body>';
                 echo ' </html>';
 

@@ -203,13 +203,13 @@ echo '<body id="page-top" class="index">
         echo '</table></center>';
 
 
-        echo '<BR><BR><BR><h2 class="section-heading">Delete an Event</H3>';
+        echo '<BR><BR><BR><h2 class="section-heading">Delete an Event(s)</H3>';
         echo "<form name='delete' action='deleteEvent.php' method='post'>";
         echo '<div class="row">
              <div class="col-lg-12 text-center">
                 <FORM action="updateEvent.php" method="post">
                      <div class="form-group">
-                         <input type="number" class="form-control" placeholder="Event ID" name="eID" required data-validation-required-message="Please enter the event ID.">
+                         <input type="number" class="form-control" placeholder="Event ID (Type "ALL" exactly as written without quotations to delete all events)" name="eID" required data-validation-required-message="Please enter the event ID.">
                      </div>';
                      echo "<input type='hidden' name='User' value=$user />";
                      echo "<input type='hidden' name='Pass' value=$pass />";

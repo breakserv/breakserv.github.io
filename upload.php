@@ -34,7 +34,7 @@
      //      echo '<BR>' .$eLocation;
      //      echo '<BR>' .$user;
 
-      // If new user (first time user), update so that they are no longer a user
+      // If new user (first time user), update so that they are no longer a new user
      if ($row[isNew] == 1) {
             $sql2 = "UPDATE Members SET isNew=0 WHERE User='$user'";
             $result2 = mysql_query($sql2);
@@ -89,9 +89,4 @@
      }
 
       mysql_close($conn);
-      /*if ($result2==1){
-            // echo ' <br> <font color="red"> New User Added! </font> '; 
-            // sleep(1);
-            //echo 'real success';
-      } else die('Invalid query: ' . mysql_error());*/
 ?>

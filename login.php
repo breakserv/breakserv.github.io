@@ -101,16 +101,22 @@ echo '<body id="page-top" class="index">
                  if ($row[isNew] == 1)
                  {
                     echo '<BR><BR><h3 class="service-heading text-muted">Start off by checking your email for events! [Python integration via button or new page]</h3>';
-                    echo '<div id="authorize-div" style="display: none">
-      <span>Authorize access to Gmail API</span>
+                    echo '<div id="authorize-div" class="container">
       <!--Button for the user to click to initiate auth sequence -->
-      <button id="authorize-button" onclick="handleAuthClick(event)">
+      <button id="authorize-button" onclick="handleAuthClick(event)" class="btn btn-xl">
         Authorize
       </button>
     </div>
     <pre id="output"></pre>';
                  } 
                  else {
+                  echo '<div id="authorize-div" class="container">
+      <!--Button for the user to click to initiate auth sequence -->
+      <button id="authorize-button" onclick="handleAuthClick(event)" class="btn btn-xl">
+        Scrape Email
+      </button>
+    </div>
+    <pre id="output"></pre>';
                     // NOTE: THIS NEEDS TO BE CHANGED LATER TO ACTUAL EMAIL! (currently, only have username + pass info)
                     // Include a button to allow the user to refresh???????
 

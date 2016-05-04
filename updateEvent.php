@@ -24,7 +24,7 @@
       if (!$eID) {
             // Make sure free users are not over capacity
             if ($row[isFree] == 1 && $row[CurrCount] == 5) {
-                  echo "<br><br><br><br><br><center><h1><b><i>You are over capacity (5 events). Please delete an event to proceed.<BR>You will be redirected momentarily.</h1></center>";
+                  echo "<br><br><br><br><br><center><h1><b><i>You are over capacity (5 events). Please delete an event to proceed.<BR><BR>You will be redirected momentarily.</h1></center>";
                   sleep(2);
                   echo '<form id="autologin" action="allevents.php" method="post">';
                   echo "<input type='hidden' name='User' value=$user />";

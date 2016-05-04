@@ -102,15 +102,19 @@ echo '<body id="page-top" class="index">
                  } 
                  else {
                     // NOTE: THIS NEEDS TO BE CHANGED LATER TO ACTUAL EMAIL! (currently, only have username + pass info)
-                    echo '<h3 class="section-subheading text-muted">Here are your events from ' .$row[User]. ' email.</h3> 
-                          </div>
-                          </div>';
+                    // Include a button to allow the user to refresh???????
+
+                    if ($row[isFree] == 1) {
+                        echo '<BR><BR><h3 class="section-subheading text-muted">WARNING. As a free user, you are able to store up to 5 slots. Currently, you are storing '.$row[CurrCount].' events. <BR>If you are storing less than 5 events, scraping will add new events until all slots are filled (nothing will be overwritten). <BR>If you are storing the maximum of 5 events, scraping will overwrite events that you have right now.</h3>';
+                    } else {
+                        echo '<BR><BR><h3 class="section-subheading text-muted">Currently, you have ' .$row[CurrCount].' events stored with us.</h3>';
+                    }
                  }
 
         echo '<center>';
 
         echo '<!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!! Code modified from Google code: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple -->
-        <BR><div id="map" style="width: 400px; height: 500px;"></div>
+        <div id="map" style="width: 400px; height: 500px;"></div>
         <script>
 
         function initMap() {

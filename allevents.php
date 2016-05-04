@@ -66,7 +66,7 @@ echo '<body id="page-top" class="index">
          if ($row[isFree] == 1)
          {  
               // ADS!!!!
-              echo '<img src="ad.jpg" class="pull-left"><img src="ad.jpg" class="pull-right">';
+              echo '<a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-left"></a><a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-right"></a>';
          }
 
         echo '<!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!! Code modified from Google code: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple -->

@@ -219,7 +219,7 @@ echo '<body id="page-top" class="index">
          if ($row[isFree] == 1)
          {  
                   // ADS!!!!
-                  echo '<img src="ad.jpg" class="pull-left"><img src="ad.jpg" class="pull-right">
+                  echo '<a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-left"></a><a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-right"></a>
 
                   <BR><BR><h3 class="service-heading text-muted">As a free user, you can store up to 5 events at once.</h3>
                   <h3 class="section-subheading text-muted">What does a <a href="index.html#services" target="_blank">Premium membership</a> offer me?</h3>

@@ -107,7 +107,7 @@ echo '<body id="page-top" class="index">
          if ($row[isFree] == 1)
          {  
               // ADS!!!!
-              echo '<BR><center><img src="kk.JPG">';
+              echo '<BR><a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><center><img src="kk.JPG"></a>';
          }
 
         echo '<!-- Go back to login homepage --><center>

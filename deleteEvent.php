@@ -18,10 +18,11 @@
       include ("connectDb.php");
 
       $sql = "DELETE FROM Events WHERE eID = '$eventID' AND eUser='$user' ";
-
       $result = mysql_query($sql);
 
       if ($result==1){
+            $newCount = $row[CurrCount] - 1;
+            $sql = "UPDATE Members SET CurrCount = '$newCount' WHERE User='$user'";
             sleep(2);
             echo '<form id="autologin" action="allevents.php" method="post">';
             echo "<input type='hidden' name='User' value=$user />";

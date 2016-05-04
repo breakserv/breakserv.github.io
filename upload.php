@@ -38,14 +38,24 @@
             $sql2 = "UPDATE Members SET isNew=0 WHERE User='$user'";
             $result2 = mysql_query($sql2);
      }
+     $newCount = $row[CurrCount];
 
      // FREE USERS can only have up to 5 events stored in the database
      // If currcount < 5, add new events until it's full
      // If currcount = 5, delete everything and add until it's full (or until there are no emails left, whichever is first)
+     if ($row[isFree] == 1) {
+            if ($newCount < 5) {
+                  asdad 
+            }
+            else {
+                  // Remove everything from Members where USER='$user'
 
-      
+                  // 
+            }
+     }
+
       // PREMIUM USERS can add in as many events as they want . Simply update currCount with it
-     if ($row[isFree] == 0) {
+      else {
             // Add to database (depending on whether the event has food or not)
             if (!$foodTypes) {
                   $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$user', '$eName', '$startDate', '$eTime', '$eLocation', 0, '$foodTypes')";

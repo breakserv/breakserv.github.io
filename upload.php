@@ -10,20 +10,20 @@
      $user = $coded_user;
 
      // Decode everything
-     if (strcmp($coded_eventname,"null") != 0) $eName = base64_decode($coded_eventname);
+     if (strcmp($coded_eventname,"null") != 0) $eName = addslashes(base64_decode($coded_eventname));
      else $eName = NULL; 
 
-     if (strcmp($coded_date,"null") != 0) $startDate = base64_decode($coded_date); 
+     if (strcmp($coded_date,"null") != 0) $startDate = addslashes(base64_decode($coded_date)); 
      else $startDate = NULL;
 
-     if (strcmp($coded_time,"null") != 0) $eTime = base64_decode($coded_time); 
+     if (strcmp($coded_time,"null") != 0) $eTime = addslashes(base64_decode($coded_time)); 
      else $eTime = NULL;
 
-     if (strcmp($coded_food,"null") != 0) $foodTypes = base64_decode($coded_food); 
+     if (strcmp($coded_food,"null") != 0) $foodTypes = addslashes(base64_decode($coded_food)); 
      else $foodTypes = NULL;
 
      if (strcmp($coded_place,"null") != 0) {
-            $eLocation = base64_decode($coded_place). " Princeton, NJ 08544"; 
+            $eLocation = addslashes(base64_decode($coded_place). " Princeton, NJ 08544"); 
       }
      else $eLocation = NULL;
 
@@ -51,11 +51,11 @@
             if ($newCount < 5) {
                   // Add to database (depending on whether the event has food or not)
                   if (!$foodTypes) {
-                        $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$user', '$eName', '$startDate', '$eTime', '$eLocation', 0, '$foodTypes')";
+                        $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES (('$user'), ('$eName'), ('$startDate'), ('$eTime'), ('$eLocation'), 0, ('$foodTypes'))";
                         $result2 = mysql_query($sql2);
                   }
                   else {
-                        $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$user', '$eName', '$startDate', '$eTime', '$eLocation', 1, '$foodTypes')";
+                        $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES (('$user'), ('$eName'), ('$startDate'), ('$eTime'), ('$eLocation'), 1, ('$foodTypes'))";
                         $result2 = mysql_query($sql2);
                   }
 
@@ -75,11 +75,11 @@
       else {
             // Add to database (depending on whether the event has food or not)
             if (!$foodTypes) {
-                  $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$user', '$eName', '$startDate', '$eTime', '$eLocation', 0, '$foodTypes')";
+                  $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES (('$user'), ('$eName'), ('$startDate'), ('$eTime'), ('$eLocation'), 0, ('$foodTypes'))";
                   $result2 = mysql_query($sql2);
             }
             else {
-                  $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES ('$user', '$eName', '$startDate', '$eTime', '$eLocation', 1, '$foodTypes')";
+                  $sql2 = "INSERT INTO Events (eUser, eventName, startDate, eTime, eLocation, isFood, eDetails) VALUES (('$user'), ('$eName'), ('$startDate'), ('$eTime'), ('$eLocation'), 1, ('$foodTypes'))";
                   $result2 = mysql_query($sql2);
             }
 

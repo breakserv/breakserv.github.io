@@ -136,7 +136,7 @@ echo '<body id="page-top" class="index">
         <div id="map" style="width: 450px; height: 500px;"></div>
         <script>
 
-        function initMap() {
+        function initMap(){
           var myLatLng = {lat: 40.3573, lng: -74.6672};
 
           var map = new google.maps.Map(document.getElementById("map"), {
@@ -178,6 +178,7 @@ echo '<body id="page-top" class="index">
                  geocodeAddress(geocoder, map, addresses[i]);
           }
         }
+        window.initMap() = initMap();
 
         function geocodeAddress(geocoder, resultsMap, events) {
             var infowindow = new google.maps.InfoWindow();
@@ -301,6 +302,9 @@ echo '<body id="page-top" class="index">
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>
+
+
+
 
 </body>';
 echo '</html>';

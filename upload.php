@@ -30,12 +30,12 @@
      include ("readDb.php");
      include ("connectDb.php");
 
-     //      echo '<BR>' .$eName;
-     //      echo '<BR>' .$startDate;
-     //      echo '<BR>' .$eTime;
-     //      echo '<BR>' .$foodTypes;
-     //      echo '<BR>' .$eLocation;
-     //      echo '<BR>' .$user;
+          echo '<BR>' .$eName;
+          echo '<BR>' .$startDate;
+          echo '<BR>' .$eTime;
+          echo '<BR>' .$foodTypes;
+          echo '<BR>' .$eLocation;
+          echo '<BR>' .$user;
 
       // If new user (first time user), update so that they are no longer a new user
      if ($row[isNew] == 1) {

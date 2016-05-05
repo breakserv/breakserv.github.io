@@ -106,7 +106,7 @@ echo '<body id="page-top" class="index">
                  // CHECK IF USER IS NEW OR NOT. If new, display "get started here!" to start the authentication/scraping process.
                  if ($row[isNew] == 1)
                  {
-                    echo '<BR><BR><h3 class="service-heading text-muted">Start off by checking your email for events! [Python integration via button or new page]</h3>';
+                    echo '<BR><BR><h3 class="service-heading text-muted">Start off by checking your email for events!</h3>';
                     echo '<div id="authorize-div" class="container">
       <!--Button for the user to click to initiate auth sequence -->
       <button id="authorize-button" onclick="handleAuthClick(event)" class="btn btn-xl">

@@ -23,7 +23,7 @@
                  include ("connectDb.php");
 
                  // Database insertion. Some columns have default values, so ignore those when inserting into database
-                 $sql = "INSERT INTO Members (fName, lName, Email, User, pass) VALUES ('$fname' ,'$lname', '$email', '$user', '$pass')";
+                 $sql = "INSERT INTO Members (fName, lName, Email, User, pass, lastScanDate) VALUES ('$fname' ,'$lname', '$email', '$user', '$pass', '1111-11-11')";
                  $result = mysql_query($sql);
 
                  if ($result==1){

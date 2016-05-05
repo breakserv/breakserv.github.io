@@ -27,8 +27,8 @@ function checkAuth() {
 
 function sendrequests() {
   var req = document.getElementById('phprequest');
-  var requests = req.innerHTML.split("___")
-  var nReq = requests.length - 1
+  var requests = req.firstChild.nodeValue.split("___")
+  var nReq = requests.length - 1 
   var nRequest = new Array()
 
   for (var i=0; i<nReq; i++) {

@@ -7,35 +7,35 @@
      $coded_place = $_GET["place"];
 
      $coded_user = $_GET["user"];
-     $user = rawurldecode($coded_user);
+     $user = $coded_user;
 
      // Decode everything
-     if (strcmp($coded_eventname,"null") != 0) $eName = rawurldecode(base64_decode($coded_eventname));
+     if (strcmp($coded_eventname,"null") != 0) $eName = base64_decode($coded_eventname);
      else $eName = NULL; 
 
-     if (strcmp($coded_date,"null") != 0) $startDate = rawurldecode(base64_decode($coded_date)); 
+     if (strcmp($coded_date,"null") != 0) $startDate = base64_decode($coded_date); 
      else $startDate = NULL;
 
-     if (strcmp($coded_time,"null") != 0) $eTime = rawurldecode(base64_decode($coded_time)); 
+     if (strcmp($coded_time,"null") != 0) $eTime = base64_decode($coded_time); 
      else $eTime = NULL;
 
-     if (strcmp($coded_food,"null") != 0) $foodTypes = rawurldecode(base64_decode($coded_food)); 
+     if (strcmp($coded_food,"null") != 0) $foodTypes = base64_decode($coded_food); 
      else $foodTypes = NULL;
 
      if (strcmp($coded_place,"null") != 0) {
-            $eLocation = rawurldecode(base64_decode($coded_place)) . " Princeton, NJ 08544"; 
+            $eLocation = base64_decode($coded_place). " Princeton, NJ 08544"; 
       }
      else $eLocation = NULL;
 
      include ("readDb.php");
      include ("connectDb.php");
 
-     //      echo '<BR>' .$eName;
-     //      echo '<BR>' .$startDate;
-     //      echo '<BR>' .$eTime;
-     //      echo '<BR>' .$foodTypes;
-     //      echo '<BR>' .$eLocation;
-     //      echo '<BR>' .$user;
+    /* echo '<BR>' .$eName;
+     echo '<BR>' .$startDate;
+     echo '<BR>' .$eTime;
+     echo '<BR>' .$foodTypes;
+     echo '<BR>' .$eLocation;
+     echo '<BR>' .$user;*/
 
       // If new user (first time user), update so that they are no longer a new user
      if ($row[isNew] == 1) {

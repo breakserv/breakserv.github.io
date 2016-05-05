@@ -361,7 +361,7 @@ function listMessages(userId, query, callback) {
             appendPre(ludate)
             appendPre(ludate.slice(0,10))
             // 2012-06-22 05:40:06 'YYYY-MM-DD HH:mm:ss'
-            var lastupdate = encodeURIComponent(Base64EncodeUrl(window.btoa(ludate.slice(0,9))))
+            var lastupdate = encodeURIComponent(Base64EncodeUrl(window.btoa(ludate.slice(0,10))))
 
             // var usrnm = encodeURIComponent("janedoe")
             // alert(usrnm)

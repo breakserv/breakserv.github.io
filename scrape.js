@@ -58,6 +58,8 @@ function sendrequests() {
         // appendPre('sent!' + i)
      })(i);
   }
+
+  setTimeout(document.getElementById("autologin").submit(), 4000)
 }
 
 /**

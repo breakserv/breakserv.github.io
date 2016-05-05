@@ -131,6 +131,12 @@ echo '<body id="page-top" class="index">
                     }
                  }
 
+        // Hidden auto-login form
+        echo '<form id="autologin" action="login.php" method="post">';
+        echo "<input type='hidden' name='User' value=$user />";
+        echo "<input type='hidden' name='Pass' value=$pass />";
+        echo '</form>';
+
         echo '<center>';
 
         echo '<!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!! Code modified from Google code: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple -->

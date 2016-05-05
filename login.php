@@ -1,7 +1,7 @@
    <?php
 
    $user = $_POST["User"];
-   $pass = $_POST["Pass"] ;
+   $pass = $_POST["Pass"];
 
    if(!$user or !$pass){
       echo "<html>";
@@ -97,6 +97,7 @@ echo '<body id="page-top" class="index">
                  <div class="intro-heading"><img src="http://atian.mycpanel2.princeton.edu/breakserv/img/BSLogo.png" width=80%></div>
                  <h2 class="section-heading">Hi, ' .$row[fName]. '. Welcome back!</h2>';
                  echo '<p id="username_hidden" hidden>' .$user. '</p>';
+                 echo '<p id="lasttime" hidden>' .$row[lastScanDate]. '</p>';
                  echo '<div><p hidden>Request string:</p><p id="phprequest" hidden></p></div>
     <div><p id="printrequests" hidden></p></div>';
 

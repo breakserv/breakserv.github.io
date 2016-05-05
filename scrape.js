@@ -106,6 +106,11 @@ function listMessagesW() {
   var queryDate = new Date()
   // alert(queryDate.getFullYear().toString() + "/" + (queryDate.getMonth() + 1).toString() + "/" + queryDate.getDate().toString())
   // queryDate.setDate(queryDate.getDate() - 7)
+
+  var lasttime = document.getElementById('lasttime').firstChild.nodeValue
+  alert(lasttime)
+  return
+
   queryDate.setDate(queryDate.getDate() - 30) // TESTING
   var day = queryDate.getDate()
   var month = queryDate.getMonth() + 1

@@ -356,11 +356,18 @@ function listMessages(userId, query, callback) {
             }
 
             var usrnm = encodeURIComponent(document.getElementById('username_hidden').innerHTML)
+
+            var ludate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            appendPre(ludate)
+            appendPre(ludate.slice(0,10))
+            // 2012-06-22 05:40:06 'YYYY-MM-DD HH:mm:ss'
+            var lastupdate = encodeURIComponent(Base64EncodeUrl(window.btoa(ludate.slice(0,9))))
+
             // var usrnm = encodeURIComponent("janedoe")
             // alert(usrnm)
 
             // appendPre(found_place + '\n' + place_encoded)
-            request_ind = 'name='+subj_encoded+'&date='+date_encoded+'&time='+time_encoded+'&food='+food_encoded+'&place='+place_encoded+"&user="+usrnm
+            request_ind = 'name='+subj_encoded+'&date='+date_encoded+'&time='+time_encoded+'&food='+food_encoded+'&place='+place_encoded+"&user="+usrnm+"&lastupdate="+lastupdate
             appendPre(request_ind)
 
             var req = document.getElementById('phprequest');

@@ -47,7 +47,7 @@ function sendrequests() {
            if (nRequest[i].readyState === 4) {
               if (nRequest[i].status === 200) {
                 console.log(nRequest[i].responseText);
-                alert(nRequest[i].responseText);
+                //alert(nRequest[i].responseText);
               } else {
                 console.log("Error", nRequest[i].statusText);
               }

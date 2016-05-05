@@ -119,7 +119,7 @@ echo '<body id="page-top" class="index">
                   echo '<div id="authorize-div" class="container">
       <!--Button for the user to click to initiate auth sequence -->
       <button id="authorize-button" onclick="handleAuthClick(event)" class="btn btn-xl">
-        Scrape Email
+        Update Events
       </button>
     </div>
     <pre id="output" hidden></pre>';

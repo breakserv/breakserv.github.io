@@ -108,7 +108,7 @@ function listMessagesW() {
   // queryDate.setDate(queryDate.getDate() - 7)
 
   var lasttime = document.getElementById('lasttime').firstChild.nodeValue
-  if (lasttime == '') {
+  if (lasttime == '1111-11-11') {
     queryDate.setDate(queryDate.getDate() - 7) // TESTING
     var day = queryDate.getDate()
     var month = queryDate.getMonth() + 1

@@ -348,8 +348,17 @@ function listMessages(userId, query, callback) {
             }
             // appendPre(found_food + '\n' + food_encoded)
             if (found_place) {
+              var firstplace = found_place[0]
+              firstplace = firstplace.replace(/butler/gi, "butler college")
+              firstplace = firstplace.replace(/wilson/gi, "wilson college")
+              firstplace = firstplace.replace(/rocky/gi, "rockefeller college")
+              firstplace = firstplace.replace(/rockefeller/gi, "rockefeller college")
+              firstplace = firstplace.replace(/mathey/gi, "mathey college")
+              firstplace = firstplace.replace(/forbes/gi, "forbes college")
+              firstplace = firstplace.replace(/whitman/gi, "whitman college")
+
               // var place_encoded = window.btoa(found_place.join('|')))
-              var place_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_place[0])))
+              var place_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(firstplace)))
               // var place_encoded = encodeURIComponent("janedoe")
             } else {
               var place_encoded = encodeURIComponent("null")

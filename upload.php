@@ -33,19 +33,25 @@
      include ("readDb.php");
      include ("connectDb.php");
 
-     echo '<BR>' .$eName;
+     /*echo '<BR>' .$eName;
      echo '<BR>' .$startDate;
      echo '<BR>' .$eTime;
      echo '<BR>' .$foodTypes;
      echo '<BR>' .$eLocation;
      echo '<BR>' .$user;
-     echo '<BR> last update - ' .$lastupdate;
+     echo '<BR> last update - ' .$lastupdate;*/
 
       // If new user (first time user), update so that they are no longer a new user
      if ($row[isNew] == 1) {
             $sql2 = "UPDATE Members SET isNew=0 WHERE User='$user'";
             $result2 = mysql_query($sql2);
      }
+
+     $sql_LU = "UPDATE Members SET lastScanDate=('$lastupdate') WHERE User='$user'";
+     $result_LU = mysql_query($sql_LU);
+     if ($result_LU==1){
+        //do nothing
+     } else die('invalid query: ' . mysql_error());
 
      // FREE USERS can only have up to 5 events stored in the database
      // If currcount < 5, add new events until it's full
@@ -66,13 +72,6 @@
                   if ($result2==1){
                         $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
                         $result2 = mysql_query($sql2);
-
-
-                        $sql_LU = "UPDATE Members SET lastScanDate=('$lastupdate') WHERE User='$user'";
-                        $result_LU = mysql_query($sql_LU);
-                        if ($result_LU==1){
-                          //do nothing
-                        } else die('invalid query: ' . mysql_error());
                   } else die('Invalid query: ' . mysql_error());
             }
             else {
@@ -96,12 +95,6 @@
             if ($result2==1){
                   $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
                   $result2 = mysql_query($sql2);
-
-                        $sql_LU = "UPDATE Members SET lastScanDate=('$lastupdate') WHERE User='$user'";
-                        $result_LU = mysql_query($sql_LU);
-                        if ($result_LU==1){
-                          //do nothing
-                        } else die('invalid query: ' . mysql_error());
             } else die('Invalid query: ' . mysql_error());
      }
 

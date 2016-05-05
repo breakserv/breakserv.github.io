@@ -310,9 +310,9 @@ function listMessages(userId, query, callback) {
                   datedate.setMonth(monum)
                   datedate.setDate(datedate.getDate() + 1)
                   var found_date_disp = 'tomorrow (' + datedate.toDateString() + ')'
-                  var date_encoded = window.btoa(datedate.toDateString())
+                  var date_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(datedate.toDateString())))
               } else {
-                var date_encoded = window.btoa(found_date[0])
+                var date_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_date[0])))
                 var found_date_disp = found_date
               }
             } else {
@@ -324,30 +324,31 @@ function listMessages(userId, query, callback) {
             appendPre('PLACE FOUND: ' + found_place)
 
             // Request string
-            var subj_encoded = window.btoa(subj)
+            var subj_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(subj)))
             // appendPre(subj + '\n' + subj_encoded)
             // appendPre(found_date + '\n' + date_encoded)
             if (found_time) {
               // var time_encoded = window.btoa(found_time.join('|')))
-              var time_encoded = window.btoa(found_time[0])
+              var time_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_time[0])))
             } else {
               var time_encoded = "null"
             }
             // appendPre(found_time + '\n' + time_encoded)
             if (found_food) {
-              var food_encoded = window.btoa(found_food.join('|'))
+              var food_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_food.join('|'))))
             } else {
               var food_encoded = "null"
             }
             // appendPre(found_food + '\n' + food_encoded)
             if (found_place) {
               // var place_encoded = window.btoa(found_place.join('|')))
-              var place_encoded = window.btoa(found_place[0])
+              var place_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_place[0])))
             } else {
               var place_encoded = "null"
             }
 
-            var usrnm = document.getElementById('username_hidden').innerHTML
+            var usrnm = encodeURIComponent(document.getElementById('username_hidden').innerHTML)
+            // alert(usrnm)
 
             // appendPre(found_place + '\n' + place_encoded)
             request_ind = 'name='+subj_encoded+'&date='+date_encoded+'&time='+time_encoded+'&food='+food_encoded+'&place='+place_encoded+"&user="+usrnm

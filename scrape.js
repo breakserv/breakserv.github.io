@@ -108,14 +108,23 @@ function listMessagesW() {
   // queryDate.setDate(queryDate.getDate() - 7)
 
   var lasttime = document.getElementById('lasttime').firstChild.nodeValue
-  alert(lasttime)
-  return
+  if (lasttime == '') {
+    queryDate.setDate(queryDate.getDate() - 7) // TESTING
+    var day = queryDate.getDate()
+    var month = queryDate.getMonth() + 1
+    var year = queryDate.getFullYear()
+    var dQ = "after:" + year.toString() + "/" + month.toString() + "/" + day.toString()
+  } else {
+    var day = lasttime.split('-')[2]
+    var month = lasttime.split('-')[1]
+    var year = lasttime.split('-')[0]
+    var dQ = "after:" + year + "/" + month + "/" + day
+  }
 
-  queryDate.setDate(queryDate.getDate() - 30) // TESTING
-  var day = queryDate.getDate()
-  var month = queryDate.getMonth() + 1
-  var year = queryDate.getFullYear()
-  var dQ = "after:" + year.toString() + "/" + month.toString() + "/" + day.toString()
+  alert(dQ)
+  // alert(lasttime)
+  // return
+
   // alert(dQ)
   listMessages('me', 'subject:(study break) ' + dQ, appendPre)
 }

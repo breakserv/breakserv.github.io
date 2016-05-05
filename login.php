@@ -98,7 +98,6 @@ echo '<body id="page-top" class="index">
                  <h2 class="section-heading">Hi, ' .$row[fName]. '. Welcome back!</h2>';
                  echo '<p id="username_hidden" hidden>' .$user. '</p>';
                  echo '<div><p hidden>Request string:</p><p id="phprequest" hidden></p></div>
-    <p id="username_hidden" hidden>atian</p>
     <div><p id="printrequests" hidden></p></div>';
 
     //    <div><button onclick="sendrequests(event) class="btn btn-xl"">Make Requests</button></div>

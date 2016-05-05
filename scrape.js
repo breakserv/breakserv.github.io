@@ -28,7 +28,7 @@ function checkAuth() {
 function sendrequests() {
   var req = document.getElementById('phprequest');
   var requests = req.firstChild.nodeValue.split("___")
-  var nReq = requests.length - 1 
+  var nReq = requests.length - 1
   var nRequest = new Array()
 
   for (var i=0; i<nReq; i++) {
@@ -293,10 +293,12 @@ function listMessages(userId, query, callback) {
               // var date_encoded = window.btoa(found_date.join('|')))
               if (found_date[0].toLowerCase() == "tonight") {
                 var found_date_disp = 'tonight (' + date_of_email_sent + ')'
-                var date_encoded = window.btoa(date_of_email_sent)
+                var date_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(date_of_email_sent)))
+                // var date_encoded = encodeURIComponent("janedoe")
               } else if (found_date[0].toLowerCase() == "today") {
                 var found_date_disp = 'tonight (' + date_of_email_sent + ')'
-                var date_encoded = window.btoa(date_of_email_sent)
+                var date_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(date_of_email_sent)))
+                // var date_encoded = encodeURIComponent("janedoe")
               } else if (found_date[0].toLowerCase().indexOf("tomorrow") > -1) {
                 // if (date_of_email_sent.test(/(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s([012]?\d|30|31),\s\d\d\d\d/i)) {
                   var daynum = parseInt(date_of_email_sent.match(/([012]?\d|30|31),/)[0].match(/([012]?\d|30|31)/)[0])
@@ -311,12 +313,14 @@ function listMessages(userId, query, callback) {
                   datedate.setDate(datedate.getDate() + 1)
                   var found_date_disp = 'tomorrow (' + datedate.toDateString() + ')'
                   var date_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(datedate.toDateString())))
+                  // var date_encoded = encodeURIComponent("janedoe")
               } else {
                 var date_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_date[0])))
+                // var date_encoded = encodeURIComponent("janedoe")
                 var found_date_disp = found_date
               }
             } else {
-              var date_encoded = "null"
+              var date_encoded = encodeURIComponent("null")
             }
             appendPre('DATES FOUND: ' + found_date_disp)
             appendPre('TIMES FOUND: ' + found_time)
@@ -325,29 +329,34 @@ function listMessages(userId, query, callback) {
 
             // Request string
             var subj_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(subj)))
+            // var subj_encoded = encodeURIComponent("janedoe")
             // appendPre(subj + '\n' + subj_encoded)
             // appendPre(found_date + '\n' + date_encoded)
             if (found_time) {
               // var time_encoded = window.btoa(found_time.join('|')))
               var time_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_time[0])))
+              // var time_encoded = encodeURIComponent("janedoe")
             } else {
-              var time_encoded = "null"
+              var time_encoded = encodeURIComponent("null")
             }
             // appendPre(found_time + '\n' + time_encoded)
             if (found_food) {
               var food_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_food.join('|'))))
+              // var food_encoded = encodeURIComponent("janedoe")
             } else {
-              var food_encoded = "null"
+              var food_encoded = encodeURIComponent("null")
             }
             // appendPre(found_food + '\n' + food_encoded)
             if (found_place) {
               // var place_encoded = window.btoa(found_place.join('|')))
               var place_encoded = encodeURIComponent(Base64EncodeUrl(window.btoa(found_place[0])))
+              // var place_encoded = encodeURIComponent("janedoe")
             } else {
-              var place_encoded = "null"
+              var place_encoded = encodeURIComponent("null")
             }
 
             var usrnm = encodeURIComponent(document.getElementById('username_hidden').innerHTML)
+            // var usrnm = encodeURIComponent("janedoe")
             // alert(usrnm)
 
             // appendPre(found_place + '\n' + place_encoded)

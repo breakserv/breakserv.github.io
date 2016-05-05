@@ -9,6 +9,9 @@
      $coded_user = $_GET["user"];
      $user = $coded_user;
 
+     $coded_lastupdate = $_GET["lastupdate"];
+     $lastupdate = addslashes(base64_decode($coded_lastupdate));
+
      // Decode everything
      if (strcmp($coded_eventname,"null") != 0) $eName = addslashes(base64_decode($coded_eventname));
      else $eName = NULL; 
@@ -64,6 +67,8 @@
                         $newCount = $row[CurrCount] + 1;
                         $sql2 = "UPDATE Members SET CurrCount='$newCount' WHERE User='$user'";
                         $result2 = mysql_query($sql2);
+                        // $sql_LU = "UPDATE Members SET lastScanDate=('$lastupdate') WHERE User='$user'";
+                        // $result_LU = mysql_query($sql_LU);
                   } else die('Invalid query: ' . mysql_error());
             }
             else {

@@ -23,7 +23,7 @@
      else $foodTypes = NULL;
 
      if (strcmp($coded_place,"null") != 0) {
-            $eLocation = addslashes(base64_decode($coded_place). " Princeton, NJ 08544"); 
+            $eLocation = addslashes(base64_decode($coded_place). " Princeton University"); 
       }
      else $eLocation = NULL;
 

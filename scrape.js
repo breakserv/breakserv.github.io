@@ -108,7 +108,7 @@ function listMessagesW() {
   // queryDate.setDate(queryDate.getDate() - 7)
 
   var lasttime = document.getElementById('lasttime').firstChild.nodeValue
-  alert(lasttime)
+  //alert(lasttime)
   if (lasttime == '1111-11-11') {
     queryDate.setDate(queryDate.getDate() - 7) // TESTING
     var day = queryDate.getDate()
@@ -122,7 +122,7 @@ function listMessagesW() {
     var dQ = "after:" + year + "/" + month + "/" + day
   }
 
-  alert(dQ)
+  //alert(dQ)
   // alert(lasttime)
   // return
 

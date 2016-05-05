@@ -138,7 +138,12 @@ echo '<body id="page-top" class="index">
         echo '</form>';
 
         echo '<center>';
-
+         //Detect if free user or not
+         if ($row[isFree] == 1)
+         {  
+              // ADS!!!!
+              echo '<a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-left"></a><a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-right"></a>';
+         }
         echo '<!-- MAP DISPLAY GOES HERE!!!!!!!!!!!!!!!!! Code modified from Google code: https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple -->
         <div id="map" style="width: 450px; height: 500px;"></div>
         <script>
@@ -227,9 +232,9 @@ echo '<body id="page-top" class="index">
          if ($row[isFree] == 1)
          {  
                   // ADS!!!!
-                  echo '<a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-left"></a><a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-right"></a>
+                  /* echo '<a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-left"></a><a href="http://atian.mycpanel2.princeton.edu/ORF401/lab3/isindexSearch.php"><img src="ad.jpg" class="pull-right"></a>';' */
 
-                  <BR><BR><h3 class="service-heading text-muted">As a free user, you can store up to 5 events at once.</h3>
+                  echo '<BR><BR><h3 class="service-heading text-muted">As a free user, you can store up to 5 events at once.</h3>
                   <h3 class="section-subheading text-muted">What does a <a href="index.html#services" target="_blank">Premium membership</a> offer me?</h3>
                   
                   <form action="upgrade.php" method="post">';

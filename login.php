@@ -99,8 +99,9 @@ echo '<body id="page-top" class="index">
                  echo '<p id="username_hidden" hidden>' .$user. '</p>';
                  echo '<div><p hidden>Request string:</p><p id="phprequest" hidden></p></div>
     <p id="username_hidden" hidden>atian</p>
-    <div><button onclick="sendrequests(event) class="btn btn-xl"">Make Requests</button></div>
     <div><p id="printrequests" hidden></p></div>';
+
+    //    <div><button onclick="sendrequests(event) class="btn btn-xl"">Make Requests</button></div>
 
                  // CHECK IF USER IS NEW OR NOT. If new, display "get started here!" to start the authentication/scraping process.
                  if ($row[isNew] == 1)

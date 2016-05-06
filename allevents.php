@@ -74,7 +74,7 @@ echo '<body id="page-top" class="index">
         <BR><div id="map" style="width: 450px; height: 500px;"></div>
         <script>
 
-        function initMap() {
+        window.initMap = function() {
           var myLatLng = {lat: 40.3573, lng: -74.6672};
 
           var map = new google.maps.Map(document.getElementById("map"), {

@@ -56,6 +56,7 @@
      // FREE USERS can only have up to 5 events stored in the database
      // If currcount < 5, add new events until it's full
      // If currcount = 5, user is over capacity - don't add anything
+     $cc = 
       if ($row[isFree] == 1) {
             if ($row[CurrCount] < 5) {
                   // Add to database (depending on whether the event has food or not)
@@ -70,8 +71,13 @@
 
                   // Update currCount if successful
                   if ($result2==1){
-                        $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
-                        $result2 = mysql_query($sql2);
+                        $sql3 = "UPDATE Members SET CurrCount = (SELECT COUNT(*) FROM Events WHERE eUser=Members.User)";
+                        // $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
+                        $result3 = mysql_query($sql3);
+
+                        if ($result3 ==1) {
+                          // Do nothing
+                        } else die('Invalid query: ' . mysql_error());
                   } else die('Invalid query: ' . mysql_error());
             }
             else {
@@ -93,8 +99,12 @@
 
             // Update currCount if successful
             if ($result2==1){
-                  $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
-                  $result2 = mysql_query($sql2);
+                  $sql3 = "UPDATE Members SET CurrCount = (SELECT COUNT(*) FROM Events WHERE eUser=Members.User)";
+                  // $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
+                  $result3 = mysql_query($sql3);
+                  if ($result3 ==1) {
+                          // Do nothing
+                        } else die('Invalid query: ' . mysql_error());
             } else die('Invalid query: ' . mysql_error());
      }
 

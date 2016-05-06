@@ -42,7 +42,7 @@ function sendrequests() {
      (function(i) {
         nRequest[i] = new XMLHttpRequest();
         // alert(requests[i])
-        nRequest[i].open("GET", 'http://atian.mycpanel2.princeton.edu/breakserv/upload.php?'+requests[i], true);
+        nRequest[i].open("GET", 'http://shuyangl.mycpanel2.princeton.edu/breakserv/upload.php?'+requests[i], true);
         nRequest[i].onreadystatechange = function (oEvent) {
            if (nRequest[i].readyState === 4) {
               if (nRequest[i].status === 200) {
@@ -201,31 +201,6 @@ function listMessages(userId, query, callback) {
             var bodygrab = recursivebody(resp.payload.parts)
             bodytext = bodytext + bodygrab
 
-            // for (j=0; j < resp.payload.parts.length; j++) {
-            //   var p = resp.payload.parts[j]
-            //   // appendPre(p.mimeType)
-            //   if (p.mimeType.indexOf('multipart/') > -1) {
-            //     for (k = 0; k < p.parts.length; k++) {
-            //       var pp = p.parts[k]
-            //       // appendPre(pp.mimeType)
-            //       if (pp.mimeType.indexOf('text') > -1) {
-            //         var decoded = window.atob(Base64DecodeUrl(pp.body.data))
-            //         bodytext = bodytext + decoded
-            //         // appendPre(pp.body.data)
-            //         // appendPre(window.atob(Base64DecodeUrl(pp.body.data)))
-            //       }
-            //     }
-            //   }
-            //   if (p.mimeType.indexOf('text') > -1) {
-            //     var decoded = window.atob(Base64DecodeUrl(p.body.data))
-            //     bodytext = bodytext + decoded
-            //     // appendPre(p.body.data)
-            //     // appendPre(window.atob(Base64DecodeUrl(p.body.data)))
-            //   }
-            // }
-
-            // appendPre(bodytext)
-
             function uniques(arr) {
                if (arr.length < 1) {
                 return null
@@ -240,7 +215,8 @@ function listMessages(userId, query, callback) {
             var date_of_email_sent = ""
             bodytext = bodytext.replace(/<[^>]+>/g, '')
             if (subj.indexOf('Fwd:') > -1) { // Forwarded email
-              bodytext = bodytext.replace(/[-]+ Forwarded message [-]+/g, '')
+              subj = subj.replace(/Fwd:\s/i, '')
+              bodytext = bodytext.replace(/[\-]+ Forwarded message [\-]+/g, '')
               var dtf = bodytext.match(/From:.+Date:.+Subject:.+To:[ a-zA-Z&:;]*([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)/)
               if (dtf) {
                 // alert(((dtf.join('')).match(/Date:.+Subject:/).join('')).slice(0,-8))

@@ -26,6 +26,9 @@
             $sql2 = "UPDATE Members SET CurrCount = 0 WHERE User='$user'";
             $result2 = mysql_query($sql2);
 
+            $sql3 = "UPDATE Members SET lastScanDate = '1111-11-11' WHERE User='$user'";
+            $result3 = mysql_query($sql3);
+
             if ($result2==1){
                   sleep(2);
                   echo '<form id="autologin" action="allevents.php" method="post">';

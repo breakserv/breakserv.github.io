@@ -39,14 +39,16 @@
                 echo ' </html>';
 
              } else {
+              include ("connectDb.php");
+              $sql3 = "UPDATE Members SET CurrCount = (SELECT COUNT(*) FROM Events WHERE eUser='$user') WHERE User = '$user'";
+              $result3 = mysql_query($sql3);
+
+              if ($result3 ==1) {
+                include ("readDb.php");
+              } else die('Invalid query: ' . mysql_error());
 
 
 echo "<html>";
-
-// ***********************************************************************
-// TEMPLATE FROM http://startbootstrap.com/template-overviews/agency/ 
-// ***********************************************************************
-
 echo "<head>";
     
     echo "<meta charset='utf-8'>";

@@ -223,7 +223,7 @@ echo '<body id="page-top" class="index">
           function checkvalue() {
             var eid = document.getElementById("eid").value
             if (!eid.match(/\S/)) {
-              var nam = document.getElementById("eName").value
+              var nam = document.getElementById("ename").value
               if (!nam.match(/\S/)) {
                 alert("Your event must have a name!")
                 return false
@@ -255,7 +255,7 @@ echo '<body id="page-top" class="index">
                     
                         <div class="col-md-6">
                             <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Event Name" name="eName" id="eName">
+                            <input type="text" class="form-control" placeholder="Event Name" name="eName" id="ename">
                             </div>
                         </div>
                      </div>

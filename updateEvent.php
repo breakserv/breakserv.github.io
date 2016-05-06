@@ -50,6 +50,7 @@
             }
       } else {
             echo "<br><br><br><br><br><center><h1><b><i>Updating event now...</h1></center>";
+            // echo '' .$eName .$startDate;
 
             if ($eName) {
                   $sql = "UPDATE Events SET eventName='$eName' WHERE eID = '$eID' AND eUser='$user'";

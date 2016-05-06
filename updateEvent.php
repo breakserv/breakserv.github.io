@@ -20,6 +20,8 @@
       include ("readDb.php");
       include ("connectDb.php");
 
+      $success = 0;
+
       // Adding an event
       if (!$eID) {
             // Make sure free users are not over capacity
@@ -54,30 +56,79 @@
 
             if ($eName) {
                   $sql = "UPDATE Events SET eventName='$eName' WHERE eID = '$eID' AND eUser='$user'";
+                  $resss = mysql_query($sql);
+                  if ($resss==1) {
+                        echo '<br><center><h3><b><i> Name updated! </font></h3></center>';
+                        $success = 1;
+                  } else {
+                        echo '<br><br><br><br><br><center><h1><font color="red"> <b><i> SQL error when updating Name. Please Try Again. </font></h1></center>'; 
+                  }
             }
             if ($isFood == 1) {
                   $sql = "UPDATE Events SET isFood=1 WHERE eID = '$eID' AND eUser='$user'";
+                  $resss = mysql_query($sql);
+                  if ($resss==1) {
+                        echo '<br><center><h3><b><i> Food updated! </font></h3></center>'; 
+                        $success = 1;
+                  } else {
+                        echo '<br><br><br><br><br><center><h1><font color="red"> <b><i> SQL error when updating Food. Please Try Again. </font></h1></center>'; 
+                  }
             }
             if ($isFood == 2) {
                   $sql = "UPDATE Events SET isFood=0 WHERE eID = '$eID' AND eUser='$user'";
+                  $resss = mysql_query($sql);
+                  if ($resss==1) {
+                        echo '<br><center><h3><b><i> Food updated! </font></h3></center>';
+                        $success = 1;
+                  } else {
+                        echo '<br><br><br><br><br><center><h1><font color="red"> <b><i> SQL error when updating Food. Please Try Again. </font></h1></center>'; 
+                  }
             }
             if ($startDate) {
                   $sql = "UPDATE Events SET startDate='$startDate' WHERE eID = '$eID' AND eUser='$user'";
+                  $resss = mysql_query($sql);
+                  if ($resss==1) {
+                        echo '<br><center><h3><b><i> Start Date updated! </font></h3></center>';
+                        $success = 1;
+                  } else {
+                        echo '<br><br><br><br><br><center><h1><font color="red"> <b><i> SQL error when updating Start Date. Please Try Again. </font></h1></center>'; 
+                  }
             }
             if ($eTime) {
                   $sql = "UPDATE Events SET eTime='$eTime' WHERE eID = '$eID' AND eUser='$user'";
+                  $resss = mysql_query($sql);
+                  if ($resss==1) {
+                        echo '<br><center><h3><b><i> Event Time updated! </font></h3></center>';
+                        $success = 1;
+                  } else {
+                        echo '<br><br><br><br><br><center><h1><font color="red"> <b><i> SQL error when updating Event Time. Please Try Again. </font></h1></center>'; 
+                  }
             }
             if ($eLocation) {
                   $sql = "UPDATE Events SET eLocation='$eLocation' WHERE eID = '$eID' AND eUser='$user'";
+                  $resss = mysql_query($sql);
+                  if ($resss==1) {
+                        echo '<br><center><h3><b><i> Event location updated! </font></h3></center>';
+                        $success = 1;
+                  } else {
+                        echo '<br><br><br><br><br><center><h1><font color="red"> <b><i> SQL error when updating Event location. Please Try Again. </font></h1></center>'; 
+                  }
             }
             if ($eDetails) {
                   $sql = "UPDATE Events SET eDetails='$eDetails' WHERE eID = '$eID' AND eUser='$user'";
+                  $resss = mysql_query($sql);
+                  if ($resss==1) {
+                        echo '<br><center><h3><b><i> Event details updated! </font></h3></center>';
+                        $success = 1;
+                  } else {
+                        echo '<br><br><br><br><br><center><h1><font color="red"> <b><i> SQL error when updating Event details. Please Try Again. </font></h1></center>'; 
+                  }
             }
       }
 
-      $result = mysql_query($sql);
+      // $result = mysql_query($sql);
 
-      if ($result==1){
+      if ($success==1){
       	echo '<br><br><br><br><br><center><h1>Event added/updated! </h1></center> ';
             sleep(2);
             echo '<form id="autologin" action="allevents.php" method="post">';

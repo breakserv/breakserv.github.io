@@ -129,7 +129,7 @@ function listMessagesW() {
   // return
 
   // alert(dQ)
-  listMessages('me', 'subject:(study break) ' + dQ, appendPre)
+  listMessages('me', 'subject:(study break) is:important ' + dQ, appendPre)
 }
 
 /**

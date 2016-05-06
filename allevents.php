@@ -219,7 +219,24 @@ echo '<body id="page-top" class="index">
          </div>';
 
         echo '<BR><BR><BR><h2 class="section-heading">Update or Add an Event</H3>';
-        echo "<form name='new' action='updateEvent.php' method='post'>";
+        echo '<script type="text/javascript">
+          function checkvalue() {
+            var nam = document.getElementById("eName").value
+            if (!nam.match(/\S/)) {
+              alert("Your event must have a name!")
+              return false
+            } else {
+              var mystring = document.getElementById("eLocation").value
+              if (!mystring.match(/\S/)) {
+                alert("You must specify a location!")
+                return false;
+              } else {
+                return true;
+              }
+            }
+          }
+        </script>';
+        echo "<form name='new' onsubmit='return checkvalue(this)' action='updateEvent.php' method='post'>";
         echo '<p class="text-muted">Leave fields BLANK if you do not wish to change them.</p>';
         echo '<div class="row">
              <div class="col-lg-12 text-center">
@@ -233,7 +250,7 @@ echo '<body id="page-top" class="index">
                     
                         <div class="col-md-6">
                             <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Event Name" name="eName">
+                            <input type="text" class="form-control" placeholder="Event Name" name="eName" id="eName">
                             </div>
                         </div>
                      </div>
@@ -256,7 +273,7 @@ echo '<body id="page-top" class="index">
                      </div>
 
                      <div class="form-group">
-                         <input type="text" class="form-control" placeholder="Location (Must include zip code and/or city and state) (150 character limit)" name="eLocation">
+                         <input type="text" class="form-control" placeholder="Location (Must include zip code and/or city and state) (150 character limit)" name="eLocation" id="eLocation">
                      </div>
 
                      <div class="form-group">

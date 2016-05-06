@@ -56,7 +56,6 @@
      // FREE USERS can only have up to 5 events stored in the database
      // If currcount < 5, add new events until it's full
      // If currcount = 5, user is over capacity - don't add anything
-     $cc = 
       if ($row[isFree] == 1) {
             if ($row[CurrCount] < 5) {
                   // Add to database (depending on whether the event has food or not)

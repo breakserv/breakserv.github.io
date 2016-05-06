@@ -53,6 +53,7 @@ function sendrequests() {
           nRequest[i].onreadystatechange = function (oEvent) {
            if (nRequest[i].readyState === 4) {
               if (nRequest[i].status === 200) {
+                alert("Request " + i + " went through")
                 console.log(nRequest[i].responseText);
                 //alert(nRequest[i].responseText);
               } else {
@@ -262,6 +263,8 @@ function listMessages(userId, query, callback) {
               }
               date_of_email_sent = dateval.match(/(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s([012]?\d|30|31)\s(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s\d\d\d\d/i)[0]
             }
+
+            alert("Body found")
 
             appendPre("DATE SENT: " + date_of_email_sent)
 

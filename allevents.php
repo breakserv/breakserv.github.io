@@ -221,18 +221,23 @@ echo '<body id="page-top" class="index">
         echo '<BR><BR><BR><h2 class="section-heading">Update or Add an Event</H3>';
         echo '<script type="text/javascript">
           function checkvalue() {
-            var nam = document.getElementById("eName").value
-            if (!nam.match(/\S/)) {
-              alert("Your event must have a name!")
-              return false
-            } else {
-              var mystring = document.getElementById("eLocation").value
-              if (!mystring.match(/\S/)) {
-                alert("You must specify a location!")
-                return false;
+            var eid = document.getElementById("eid").value
+            if (!eid.match(/\S/)) {
+              var nam = document.getElementById("eName").value
+              if (!nam.match(/\S/)) {
+                alert("Your event must have a name!")
+                return false
               } else {
-                return true;
+                var mystring = document.getElementById("eLocation").value
+                if (!mystring.match(/\S/)) {
+                  alert("You must specify a location!")
+                  return false;
+                } else {
+                  return true;
+                }
               }
+            } else {
+              return true;
             }
           }
         </script>';
@@ -244,7 +249,7 @@ echo '<body id="page-top" class="index">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                            <input type="text" class="form-control" placeholder="ID (Leave blank to add a new event)" name="eID">
+                            <input type="text" class="form-control" placeholder="ID (Leave blank to add a new event)" name="eID" id="eid">
                             </div>
                         </div>
                     

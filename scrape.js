@@ -28,6 +28,12 @@ function checkAuth() {
 function sendrequests() {
   var req = document.getElementById('phprequest');
   var requests = req.firstChild.nodeValue.split("___")
+
+  var isfree = document.getElementById('isfree').firstChild.nodeValue
+  if (isfree == "FREE") {
+    requests = requests.slice(0,6)
+  }
+
   var nReq = requests.length - 1
   var nRequest = new Array()
 

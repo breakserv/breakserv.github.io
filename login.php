@@ -102,6 +102,13 @@ echo '<body id="page-top" class="index">
                  echo '<p id="lasttime" hidden>' .$row[lastScanDate]. '</p>';
                  echo '<div><p hidden>Request string:</p><p id="phprequest" hidden></p></div>
     <div><p id="printrequests" hidden></p></div>';
+    echo '<p id="isfree" hidden>';
+    if ($row[isFree] == 1) {
+      echo 'FREE';
+    } else {
+      echo 'PREMIUM';
+    }
+    echo '</p>';
 
     //    <div><button onclick="sendrequests(event) class="btn btn-xl"">Make Requests</button></div>
 

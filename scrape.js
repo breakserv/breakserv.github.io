@@ -43,7 +43,8 @@ function sendrequests() {
         nRequest[i] = new XMLHttpRequest();
         // alert(requests[i])
         nRequest[i].open("GET", 'http://shuyangl.mycpanel2.princeton.edu/breakserv/upload.php?'+requests[i], true);
-        nRequest[i].onreadystatechange = function (oEvent) {
+        if (i < nReq - 1) {
+          nRequest[i].onreadystatechange = function (oEvent) {
            if (nRequest[i].readyState === 4) {
               if (nRequest[i].status === 200) {
                 console.log(nRequest[i].responseText);
@@ -52,14 +53,26 @@ function sendrequests() {
                 console.log("Error", nRequest[i].statusText);
               }
            }
-        };
+          };
+        } else {
+          nRequest[i].onreadystatechange = function (oEvent) {
+            if (nRequest[i].readyState === 4) {
+              if (nRequest[i].status === 200) {
+                setTimeout(document.getElementById("autologin").submit(), 4000)
+              } else {
+                console.log("Error", nRequest[i].statusText);
+              }
+            }
+          }
+        }
+        
         nRequest[i].send();
         // alert("sent!" + i)
         // appendPre('sent!' + i)
      })(i);
   }
 
-  setTimeout(document.getElementById("autologin").submit(), 4000)
+  
 }
 
 /**

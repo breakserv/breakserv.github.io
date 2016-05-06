@@ -70,12 +70,12 @@
                   }
 
                   // Update currCount if successful
-                  if ($result2==1){
-                        $sql3 = "UPDATE Members SET CurrCount = (SELECT COUNT(*) FROM Events WHERE eUser=Members.User)";
-                        // $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
+                  if ($result2){
+                        //$sql3 = "UPDATE Members SET CurrCount = (SELECT COUNT(*) FROM Events WHERE eUser=Members.User)";
+                        $sql3 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
                         $result3 = mysql_query($sql3);
 
-                        if ($result3 ==1) {
+                        if ($result3) {
                           // Do nothing
                         } else die('Invalid query: ' . mysql_error());
                   } else die('Invalid query: ' . mysql_error());
@@ -98,11 +98,11 @@
             }
 
             // Update currCount if successful
-            if ($result2==1){
-                  $sql3 = "UPDATE Members SET CurrCount = (SELECT COUNT(*) FROM Events WHERE eUser=Members.User)";
-                  // $sql2 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
+            if ($result2){
+                  //$sql3 = "UPDATE Members SET CurrCount = (SELECT COUNT(*) FROM Events WHERE eUser=Members.User)";
+                  $sql3 = "UPDATE Members SET CurrCount=CurrCount+1 WHERE User='$user'";
                   $result3 = mysql_query($sql3);
-                  if ($result3 ==1) {
+                  if ($result3) {
                           // Do nothing
                         } else die('Invalid query: ' . mysql_error());
             } else die('Invalid query: ' . mysql_error());

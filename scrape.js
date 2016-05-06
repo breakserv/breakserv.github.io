@@ -53,7 +53,7 @@ function sendrequests() {
           nRequest[i].onreadystatechange = function (oEvent) {
            if (nRequest[i].readyState === 4) {
               if (nRequest[i].status === 200) {
-                alert("Request " + i + " went through")
+                // alert("Request " + i + " went through")
                 console.log(nRequest[i].responseText);
                 //alert(nRequest[i].responseText);
               } else {
@@ -144,6 +144,8 @@ function listMessagesW() {
     var dQ = "after:" + year + "/" + month + "/" + day
   }
 
+  // alert('subject:(study break) is:important ' + dQ)
+
   //alert(dQ)
   // alert(lasttime)
   // return
@@ -176,8 +178,18 @@ function listMessages(userId, query, callback) {
         getPageOfMessages(request, result, tR);
       } else {
         appendPre(tR + " results found!\n");
+        if (result.length < 1) {
+          alert("We couldn't find any events marked as important from your emails in the past week!")
+          return
+        } else if (result[0] == undefined) {
+          alert("We couldn't find any events marked as important from your emails in the past week!")
+          return
+        }
         for (i=0; i < result.length; i++) {
           var msg = result[i]; // Only id, threadId
+          // alert(msg)
+          // alert(result)
+          // alert(result.length)
           var fullmsgrequest = gapi.client.gmail.users.messages.get({
             'userId': userId,
             'id': msg.id,
@@ -201,6 +213,8 @@ function listMessages(userId, query, callback) {
             appendPre(resp.id)
 
             var bodytext = ""
+
+            subj = subj.replace(/["]/g, '')
 
             function recursivebody(parts_list) {
               var bodystring = ""
@@ -234,6 +248,7 @@ function listMessages(userId, query, callback) {
 
             var date_of_email_sent = ""
             bodytext = bodytext.replace(/<[^>]+>/g, '')
+            bodytext = bodytext.replace(/["]/g, '')
             if (subj.indexOf('Fwd:') > -1) { // Forwarded email
               subj = subj.replace(/Fwd:\s/i, '')
               bodytext = bodytext.replace(/[\-]+ Forwarded message [\-]+/g, '')
@@ -264,7 +279,7 @@ function listMessages(userId, query, callback) {
               date_of_email_sent = dateval.match(/(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s([012]?\d|30|31)\s(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\s\d\d\d\d/i)[0]
             }
 
-            alert("Body found")
+            // alert("Body found")
 
             appendPre("DATE SENT: " + date_of_email_sent)
 

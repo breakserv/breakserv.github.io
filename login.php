@@ -232,9 +232,6 @@ echo '<body id="page-top" class="index">
         }
 
         </script>
-        <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnj2eV9X-3Ri1W0DQOt-o_hHYVj2ox7Xs&callback=initMap">
-        </script>
 
          <!-- Detect if free user or not -->';
          if ($row[isFree] == 1)
@@ -307,6 +304,7 @@ echo '<body id="page-top" class="index">
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -322,6 +320,10 @@ echo '<body id="page-top" class="index">
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnj2eV9X-3Ri1W0DQOt-o_hHYVj2ox7Xs&callback=initMap">
+        </script>
 
 
 
